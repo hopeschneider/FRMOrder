@@ -30,29 +30,31 @@
         {
             this.label2 = new System.Windows.Forms.Label();
             this.GBXDeliveryInfo = new System.Windows.Forms.GroupBox();
-            this.RDOMail = new System.Windows.Forms.RadioButton();
             this.RDOHandDelivery = new System.Windows.Forms.RadioButton();
+            this.RDOMail = new System.Windows.Forms.RadioButton();
             this.GBXCustomerInfo = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.TXTCustomerName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.TXTCity = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.TXTZipCode = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.TXTStreetAddress = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.CBXState = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.TXTPhoneNumber = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.CBXState = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.TXTStreetAddress = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.TXTZipCode = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.TXTCity = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.TXTCustomerName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.GBXProductInfo = new System.Windows.Forms.GroupBox();
-            this.CBXProductType = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.CBXMaterialDesign = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.TXTQuantity = new System.Windows.Forms.TextBox();
             this.BTNAddItemToOrder = new System.Windows.Forms.Button();
+            this.TXTQuantity = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.CBXMaterialDesign = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.CBXProductType = new System.Windows.Forms.ComboBox();
+            this.BTNProcessOrder = new System.Windows.Forms.Button();
+            this.BTNClearForm = new System.Windows.Forms.Button();
             this.GBXDeliveryInfo.SuspendLayout();
             this.GBXCustomerInfo.SuspendLayout();
             this.GBXProductInfo.SuspendLayout();
@@ -77,17 +79,6 @@
             this.GBXDeliveryInfo.TabStop = false;
             this.GBXDeliveryInfo.Text = "Delivery Information:";
             // 
-            // RDOMail
-            // 
-            this.RDOMail.AutoSize = true;
-            this.RDOMail.Location = new System.Drawing.Point(47, 51);
-            this.RDOMail.Name = "RDOMail";
-            this.RDOMail.Size = new System.Drawing.Size(85, 20);
-            this.RDOMail.TabIndex = 0;
-            this.RDOMail.TabStop = true;
-            this.RDOMail.Text = "Mail ($10)";
-            this.RDOMail.UseVisualStyleBackColor = true;
-            // 
             // RDOHandDelivery
             // 
             this.RDOHandDelivery.AutoSize = true;
@@ -98,6 +89,17 @@
             this.RDOHandDelivery.TabStop = true;
             this.RDOHandDelivery.Text = "Hand Delivery ($15)";
             this.RDOHandDelivery.UseVisualStyleBackColor = true;
+            // 
+            // RDOMail
+            // 
+            this.RDOMail.AutoSize = true;
+            this.RDOMail.Location = new System.Drawing.Point(47, 51);
+            this.RDOMail.Name = "RDOMail";
+            this.RDOMail.Size = new System.Drawing.Size(85, 20);
+            this.RDOMail.TabIndex = 0;
+            this.RDOMail.TabStop = true;
+            this.RDOMail.Text = "Mail ($10)";
+            this.RDOMail.UseVisualStyleBackColor = true;
             // 
             // GBXCustomerInfo
             // 
@@ -120,86 +122,12 @@
             this.GBXCustomerInfo.TabStop = false;
             this.GBXCustomerInfo.Text = "Customer Information:";
             // 
-            // label1
+            // TXTPhoneNumber
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(24, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Customer Name:";
-            // 
-            // TXTCustomerName
-            // 
-            this.TXTCustomerName.Location = new System.Drawing.Point(27, 49);
-            this.TXTCustomerName.Name = "TXTCustomerName";
-            this.TXTCustomerName.Size = new System.Drawing.Size(266, 22);
-            this.TXTCustomerName.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(24, 88);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 16);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "City:";
-            // 
-            // TXTCity
-            // 
-            this.TXTCity.Location = new System.Drawing.Point(27, 107);
-            this.TXTCity.Name = "TXTCity";
-            this.TXTCity.Size = new System.Drawing.Size(180, 22);
-            this.TXTCity.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(24, 145);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(65, 16);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Zip Code:";
-            // 
-            // TXTZipCode
-            // 
-            this.TXTZipCode.Location = new System.Drawing.Point(27, 164);
-            this.TXTZipCode.Name = "TXTZipCode";
-            this.TXTZipCode.Size = new System.Drawing.Size(131, 22);
-            this.TXTZipCode.TabIndex = 5;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(376, 30);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(99, 16);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Street Address:";
-            // 
-            // TXTStreetAddress
-            // 
-            this.TXTStreetAddress.Location = new System.Drawing.Point(379, 49);
-            this.TXTStreetAddress.Name = "TXTStreetAddress";
-            this.TXTStreetAddress.Size = new System.Drawing.Size(291, 22);
-            this.TXTStreetAddress.TabIndex = 7;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(376, 88);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 16);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "State:";
-            // 
-            // CBXState
-            // 
-            this.CBXState.FormattingEnabled = true;
-            this.CBXState.Location = new System.Drawing.Point(379, 107);
-            this.CBXState.Name = "CBXState";
-            this.CBXState.Size = new System.Drawing.Size(172, 24);
-            this.CBXState.TabIndex = 9;
+            this.TXTPhoneNumber.Location = new System.Drawing.Point(379, 164);
+            this.TXTPhoneNumber.Name = "TXTPhoneNumber";
+            this.TXTPhoneNumber.Size = new System.Drawing.Size(172, 22);
+            this.TXTPhoneNumber.TabIndex = 11;
             // 
             // label7
             // 
@@ -210,12 +138,86 @@
             this.label7.TabIndex = 10;
             this.label7.Text = "Phone Number:";
             // 
-            // TXTPhoneNumber
+            // CBXState
             // 
-            this.TXTPhoneNumber.Location = new System.Drawing.Point(379, 164);
-            this.TXTPhoneNumber.Name = "TXTPhoneNumber";
-            this.TXTPhoneNumber.Size = new System.Drawing.Size(172, 22);
-            this.TXTPhoneNumber.TabIndex = 11;
+            this.CBXState.FormattingEnabled = true;
+            this.CBXState.Location = new System.Drawing.Point(379, 107);
+            this.CBXState.Name = "CBXState";
+            this.CBXState.Size = new System.Drawing.Size(172, 24);
+            this.CBXState.TabIndex = 9;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(376, 88);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(41, 16);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "State:";
+            // 
+            // TXTStreetAddress
+            // 
+            this.TXTStreetAddress.Location = new System.Drawing.Point(379, 49);
+            this.TXTStreetAddress.Name = "TXTStreetAddress";
+            this.TXTStreetAddress.Size = new System.Drawing.Size(291, 22);
+            this.TXTStreetAddress.TabIndex = 7;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(376, 30);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(99, 16);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Street Address:";
+            // 
+            // TXTZipCode
+            // 
+            this.TXTZipCode.Location = new System.Drawing.Point(27, 164);
+            this.TXTZipCode.Name = "TXTZipCode";
+            this.TXTZipCode.Size = new System.Drawing.Size(131, 22);
+            this.TXTZipCode.TabIndex = 5;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(24, 145);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 16);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Zip Code:";
+            // 
+            // TXTCity
+            // 
+            this.TXTCity.Location = new System.Drawing.Point(27, 107);
+            this.TXTCity.Name = "TXTCity";
+            this.TXTCity.Size = new System.Drawing.Size(180, 22);
+            this.TXTCity.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(24, 88);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(32, 16);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "City:";
+            // 
+            // TXTCustomerName
+            // 
+            this.TXTCustomerName.Location = new System.Drawing.Point(27, 49);
+            this.TXTCustomerName.Name = "TXTCustomerName";
+            this.TXTCustomerName.Size = new System.Drawing.Size(266, 22);
+            this.TXTCustomerName.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 16);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Customer Name:";
             // 
             // GBXProductInfo
             // 
@@ -233,39 +235,22 @@
             this.GBXProductInfo.TabStop = false;
             this.GBXProductInfo.Text = "Product Information:";
             // 
-            // CBXProductType
+            // BTNAddItemToOrder
             // 
-            this.CBXProductType.FormattingEnabled = true;
-            this.CBXProductType.Location = new System.Drawing.Point(13, 51);
-            this.CBXProductType.Name = "CBXProductType";
-            this.CBXProductType.Size = new System.Drawing.Size(216, 24);
-            this.CBXProductType.TabIndex = 0;
+            this.BTNAddItemToOrder.Location = new System.Drawing.Point(297, 187);
+            this.BTNAddItemToOrder.Name = "BTNAddItemToOrder";
+            this.BTNAddItemToOrder.Size = new System.Drawing.Size(201, 47);
+            this.BTNAddItemToOrder.TabIndex = 6;
+            this.BTNAddItemToOrder.Text = "Add Item to Order";
+            this.BTNAddItemToOrder.UseVisualStyleBackColor = true;
+            this.BTNAddItemToOrder.Click += new System.EventHandler(this.BTNAddItemToOrder_Click);
             // 
-            // label8
+            // TXTQuantity
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(10, 32);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(91, 16);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Product Type:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(10, 87);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(111, 16);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Material / Design:";
-            // 
-            // CBXMaterialDesign
-            // 
-            this.CBXMaterialDesign.FormattingEnabled = true;
-            this.CBXMaterialDesign.Location = new System.Drawing.Point(13, 106);
-            this.CBXMaterialDesign.Name = "CBXMaterialDesign";
-            this.CBXMaterialDesign.Size = new System.Drawing.Size(216, 24);
-            this.CBXMaterialDesign.TabIndex = 3;
+            this.TXTQuantity.Location = new System.Drawing.Point(13, 162);
+            this.TXTQuantity.Name = "TXTQuantity";
+            this.TXTQuantity.Size = new System.Drawing.Size(131, 22);
+            this.TXTQuantity.TabIndex = 5;
             // 
             // label10
             // 
@@ -276,27 +261,66 @@
             this.label10.TabIndex = 4;
             this.label10.Text = "Quantity:";
             // 
-            // TXTQuantity
+            // CBXMaterialDesign
             // 
-            this.TXTQuantity.Location = new System.Drawing.Point(13, 162);
-            this.TXTQuantity.Name = "TXTQuantity";
-            this.TXTQuantity.Size = new System.Drawing.Size(131, 22);
-            this.TXTQuantity.TabIndex = 5;
+            this.CBXMaterialDesign.FormattingEnabled = true;
+            this.CBXMaterialDesign.Location = new System.Drawing.Point(13, 106);
+            this.CBXMaterialDesign.Name = "CBXMaterialDesign";
+            this.CBXMaterialDesign.Size = new System.Drawing.Size(216, 24);
+            this.CBXMaterialDesign.TabIndex = 3;
             // 
-            // BTNAddItemToOrder
+            // label9
             // 
-            this.BTNAddItemToOrder.Location = new System.Drawing.Point(297, 187);
-            this.BTNAddItemToOrder.Name = "BTNAddItemToOrder";
-            this.BTNAddItemToOrder.Size = new System.Drawing.Size(201, 47);
-            this.BTNAddItemToOrder.TabIndex = 6;
-            this.BTNAddItemToOrder.Text = "Add Item to Order";
-            this.BTNAddItemToOrder.UseVisualStyleBackColor = true;
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(10, 87);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(111, 16);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "Material / Design:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(10, 32);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(91, 16);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Product Type:";
+            // 
+            // CBXProductType
+            // 
+            this.CBXProductType.FormattingEnabled = true;
+            this.CBXProductType.Location = new System.Drawing.Point(13, 51);
+            this.CBXProductType.Name = "CBXProductType";
+            this.CBXProductType.Size = new System.Drawing.Size(216, 24);
+            this.CBXProductType.TabIndex = 0;
+            // 
+            // BTNProcessOrder
+            // 
+            this.BTNProcessOrder.Location = new System.Drawing.Point(803, 472);
+            this.BTNProcessOrder.Name = "BTNProcessOrder";
+            this.BTNProcessOrder.Size = new System.Drawing.Size(139, 47);
+            this.BTNProcessOrder.TabIndex = 5;
+            this.BTNProcessOrder.Text = "Process Order";
+            this.BTNProcessOrder.UseVisualStyleBackColor = true;
+            this.BTNProcessOrder.Click += new System.EventHandler(this.BTNProcessOrder_Click);
+            // 
+            // BTNClearForm
+            // 
+            this.BTNClearForm.Location = new System.Drawing.Point(954, 472);
+            this.BTNClearForm.Name = "BTNClearForm";
+            this.BTNClearForm.Size = new System.Drawing.Size(139, 47);
+            this.BTNClearForm.TabIndex = 6;
+            this.BTNClearForm.Text = "Clear Form";
+            this.BTNClearForm.UseVisualStyleBackColor = true;
             // 
             // FRMOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1145, 656);
+            this.ClientSize = new System.Drawing.Size(1125, 543);
+            this.Controls.Add(this.BTNClearForm);
+            this.Controls.Add(this.BTNProcessOrder);
             this.Controls.Add(this.GBXProductInfo);
             this.Controls.Add(this.GBXCustomerInfo);
             this.Controls.Add(this.GBXDeliveryInfo);
@@ -340,6 +364,8 @@
         private System.Windows.Forms.ComboBox CBXProductType;
         private System.Windows.Forms.Button BTNAddItemToOrder;
         private System.Windows.Forms.TextBox TXTQuantity;
+        private System.Windows.Forms.Button BTNProcessOrder;
+        private System.Windows.Forms.Button BTNClearForm;
     }
 }
 
