@@ -9,8 +9,11 @@ namespace FRMOrder
 {
     public static class Validator
     {
+
+        #region Generic Utility Validation Methods
+
         /// <summary>
-        /// Checks if a requirred text field is filled.
+        /// Checks if a required text field is filled.
         /// </summary>
         /// <param name="strTestValue"></param>
         /// <param name="strControlName"></param>
@@ -63,5 +66,37 @@ namespace FRMOrder
                 return false;
             }
         }
+
+        #endregion
+
+        #region High-Level Form Validation Routines
+
+        /// <summary>
+        /// Validates product selection prior to adding an item to the order ListBox.
+        /// Stops on the first invalid field so only ONE message box pops up.
+        /// </summary>
+        /// <param name="intProductIndex"></param>
+        /// <param name="intMaterialIndex"></param>
+        /// <returns></returns>
+        public static bool ValidateItemEntry(int intProductIndex, int intMaterialIndex)
+        {
+            if(intProductIndex < 0)
+            {
+                MessageBox.Show("Please select a Product Type.", "Selection Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if(intMaterialIndex < 0)
+            {
+                MessageBox.Show("Please select a Material or Design option.", "Selection Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
+        #endregion
+
     }
 }

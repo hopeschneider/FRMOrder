@@ -8,6 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//AUTHORS: 
+//COURSE: 
+//FORM: 
+//PURPOSE: 
+//INPUT: 
+//PROCESS: 
+//OUTPUT: 
+//HONOR CODE: “On my honor, as an Aggie, I have neither given
+// nor received unauthorized aid on this academic
+// work.”
+
+
 namespace FRMOrder
 {
     public partial class FRMOrder : Form
@@ -94,6 +106,12 @@ namespace FRMOrder
             {
                 return;
             }
+
+            //Checks if CBXProductType and CBXMaterialDesign are selected before adding item to the order
+            //and stops addition if an error is detected.
+            bool isValid = Validator.ValidateItemEntry(CBXProductType.SelectedIndex,
+                                                       CBXMaterialDesign.SelectedIndex);
+            if (!isValid) return;
 
             //THE CODE FOR ADDING THE ITEM TO THE ORDER WILL GO HERE:
         }
