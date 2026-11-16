@@ -91,7 +91,10 @@ namespace FRMOrder
                 return;
             }
 
-            //THE CODE FOR PROCESSING THE ORDER WILL GO HERE:
+            // Displays a message box confirming that the order has been processed successfully
+            MessageBox.Show("Your order has been processed successfully!", "Order Confirmation", 
+                            MessageBoxButtons.OK, MessageBoxIcons.Information);
+            
         }
 
         /// <summary>
@@ -121,7 +124,7 @@ namespace FRMOrder
                                                        CBXMaterialDesign.SelectedIndex);
             if (!isValid) return;
 
-            //THE CODE FOR ADDING THE ITEM TO THE ORDER WILL GO HERE:
+           
 
 
             int intQuantity = int.Parse(TXTQuantity.Text);
@@ -232,6 +235,36 @@ namespace FRMOrder
             {
                 PBXProductImage.Image = Properties.Resources.textile;
             }
+        }
+
+        private void BTNClearForm_Click(object sender, EventArgs e)
+        {
+            // Clear all input fields and selections on the form
+            TXTCustomerName.Clear();
+            TXTStreetAddress.Clear();
+            TXTCity.Clear();
+            CBXState.SelectedIndex = -1;
+            TXTZipCode.Clear();
+            TXTPhoneNumber.Clear();
+
+            // Clear the delivery option radio buttons
+            RDOMail.Checked = false;
+            RDOHandDelivery.Checked = false;
+
+            // Clear the product selection and related fields
+            CBXProductType.SelectedIndex = -1;
+            CBXMaterialDesign.Items.Clear();
+            CBXMaterialDesign.Text = "";
+            TXTQuantity.Clear();
+
+            // Clears the product image 
+            PBXProductImage.Image = null;
+
+            // Clear the order items list
+            LBXOrderItems.Items.Clear();
+
+            // Puts the focus back on the Customer Name textbox for user convenience
+            TXTCustomerName.Focus();
         }
     }
 }
