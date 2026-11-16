@@ -36,6 +36,9 @@ namespace FRMOrder
         {
             InitializeComponent();
         }
+
+        #region Order Processing
+
         /// <summary>
         /// This method is triggered when the "Process Order" button is clicked. 
         /// It validates the input fields to ensure that all required fields are filled, 
@@ -93,6 +96,10 @@ namespace FRMOrder
 
             //THE CODE FOR PROCESSING THE ORDER WILL GO HERE:
         }
+
+        #endregion
+
+        #region Order Add Item Management
 
         /// <summary>
         /// This method is triggered when the "Add Item to Order" button is clicked.
@@ -157,6 +164,8 @@ namespace FRMOrder
             // clear quantity for the next item
             TXTQuantity.Clear();
         }
+
+        #endregion
 
         private void CBXProductType_SelectedIndexChanged(object sender, EventArgs e)
         {
