@@ -36,6 +36,9 @@ namespace FRMOrder
         {
             InitializeComponent();
         }
+
+        #region Order Processing
+
         /// <summary>
         /// This method is triggered when the "Process Order" button is clicked. 
         /// It validates the input fields to ensure that all required fields are filled, 
@@ -96,6 +99,10 @@ namespace FRMOrder
                             MessageBoxButtons.OK);
             
         }
+
+        #endregion
+
+        #region Order Add Item Management
 
         /// <summary>
         /// This method is triggered when the "Add Item to Order" button is clicked.
@@ -161,6 +168,14 @@ namespace FRMOrder
             TXTQuantity.Clear();
         }
 
+        #endregion
+
+        /// <summary>
+        /// This method updates the options in the material design dropdown menu
+        /// based on the selected product type.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CBXProductType_SelectedIndexChanged(object sender, EventArgs e)
         {
             // get the selected product
