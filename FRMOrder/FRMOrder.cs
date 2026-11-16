@@ -114,6 +114,116 @@ namespace FRMOrder
             if (!isValid) return;
 
             //THE CODE FOR ADDING THE ITEM TO THE ORDER WILL GO HERE:
+
+
+            int intQuantity = int.Parse(TXTQuantity.Text);
+
+            string strProduct = CBXProductType.Text;
+            string strMaterial = CBXMaterialDesign.Text;
+
+            decimal decPrice = 25.00m;
+
+            // determine the product price
+            if (strProduct == "Knitted scarf")
+            {
+                decPrice = 35.00m;
+            }
+            else if (strProduct == "Leather wallet")
+            {
+                if (strMaterial == "Bifold")
+                    decPrice = 20.00m;
+                else if (strMaterial == "Trifold")
+                    decPrice = 30.00m;
+                else if (strMaterial == "Passport")
+                    decPrice = 35.00m;
+            }
+
+            // calculate item subtotal
+            decimal decItemSubtotal = intQuantity * decPrice;
+
+            // display the item in the ListBox
+            string strOrderItem = $"{strMaterial} {strProduct}, " + $"{intQuantity}@{decPrice:C}, " + $"total: {decItemSubtotal:C}";
+
+            LBXOrderItems.Items.Add(strOrderItem);
+
+            // clear quantity for the next item
+            TXTQuantity.Clear();
+        }
+
+        private void CBXProductType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // get the selected product
+            string strProduct = CBXProductType.Text;
+
+            // clear previous material selections
+            CBXMaterialDesign.Items.Clear();
+            CBXMaterialDesign.Text = "";
+
+            // add materials for leather wallets
+            if (strProduct == "Leather wallet")
+            {
+                CBXMaterialDesign.Items.Add("Bifold");
+                CBXMaterialDesign.Items.Add("Trifold");
+                CBXMaterialDesign.Items.Add("Passport");
+            }
+            // add materials for wood jewelry box
+            else if (strProduct == "Wood jewelry box")
+            {
+                CBXMaterialDesign.Items.Add("Art Deco");
+                CBXMaterialDesign.Items.Add("Rustic");
+                CBXMaterialDesign.Items.Add("Mid-Century");
+                CBXMaterialDesign.Items.Add("Victorian");
+                CBXMaterialDesign.Items.Add("Classic");
+            }
+            // add materials for ceramic vase
+            else if (strProduct == "Ceramic vase")
+            {
+                CBXMaterialDesign.Items.Add("Modern");
+                CBXMaterialDesign.Items.Add("Minimalist");
+                CBXMaterialDesign.Items.Add("Ornate");
+                CBXMaterialDesign.Items.Add("Stoneware");
+            }
+            // add materials for handmade candle
+            else if (strProduct == "Handmade candle")
+            {
+                CBXMaterialDesign.Items.Add("Votive");
+                CBXMaterialDesign.Items.Add("Pillar");
+                CBXMaterialDesign.Items.Add("Taper");
+            }
+            // add materials for stained glass
+            else if (strProduct == "Stained glass frame")
+            {
+                CBXMaterialDesign.Items.Add("Geometric");
+                CBXMaterialDesign.Items.Add("Floral");
+                CBXMaterialDesign.Items.Add("Abstract");
+                CBXMaterialDesign.Items.Add("Mosaic");
+            }
+            // add materials for knitted scarf
+            else if (strProduct == "Knitted scarf")
+            {
+                CBXMaterialDesign.Items.Add("Bandana");
+                CBXMaterialDesign.Items.Add("Square");
+                CBXMaterialDesign.Items.Add("Shawl");
+                CBXMaterialDesign.Items.Add("Infinity");
+            }
+
+
+            // display the correct image based on the product
+            if (strProduct == "Wood jewelry box" ||
+                strProduct == "Ceramic vase")
+            {
+                PBXProductImage.Image = Properties.Resources.craft;
+            }
+            else if (strProduct == "Handmade candle" ||
+                     strProduct == "Stained glass frame")
+            {
+                PBXProductImage.Image = Properties.Resources.decor;
+            }
+            else if (strProduct == "Knitted scarf" ||
+                     strProduct == "Leather wallet")
+            {
+                PBXProductImage.Image = Properties.Resources.textile;
+            }
         }
     }
 }
