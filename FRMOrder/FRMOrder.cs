@@ -8,13 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//AUTHORS: 
-//COURSE: 
-//FORM: 
-//PURPOSE: 
-//INPUT: 
-//PROCESS: 
-//OUTPUT: 
+//AUTHORS: Hope Schneider, Krishita Madhekar, Kiet Nguyen, Andrea Perez
+//COURSE: ISTM 250.501
+//FORM: FRMOrder
+//PURPOSE: This program is designed to transition Copperleaf Crafts
+// from paper record-keeping to a digital order management system to record
+// craft product orders, validate customer and item inputs, and calculate order totals.
+//INPUT: Customer contact info from textboxes (TXTCustomerName, TXTStreetAddress,
+// TXTCity, CBXState, TXTZipCode, TXTPhoneNumber), delivery option (RDOHandDelivery or RDOMail),
+// item selections from CBXProductType and CBXMaterialDesign,
+// and a positive integer quantity from TXTQuantity.                                          
+//PROCESS: BTNAddItemOrder_Click, BTNProcessOrder_Click, BTNClearForm_Click, BTNCloseForm_Click
+//OUTPUT: 1. Formatted order line items appended to LBXOrderItems
+//        2. Product preview image displayed in PBXProductImage
+//        3. Order total displayed in summary textboxes (TXTSubtotal, TXTShipping, TXTTax, TXTTotal)
+//        4. Validation error dialog messages or order success notification message box
 //HONOR CODE: “On my honor, as an Aggie, I have neither given
 // nor received unauthorized aid on this academic
 // work.”
