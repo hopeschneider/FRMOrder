@@ -252,6 +252,15 @@ namespace FRMOrder
             }
         }
 
+        /// <summary>
+        /// This method is triggered when the "Clear Form" button is clicked. 
+        /// It clears all input fields, selections, and the order items list 
+        /// on the form, effectively resetting the form to its initial state. 
+        /// After clearing, it sets the focus back to the Customer Name 
+        /// textbox for user convenience.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BTNClearForm_Click(object sender, EventArgs e)
         {
             // Clear all input fields and selections on the form
