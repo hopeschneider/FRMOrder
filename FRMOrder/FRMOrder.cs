@@ -167,6 +167,12 @@ namespace FRMOrder
 
         #endregion
 
+        /// <summary>
+        /// This method updates the options in the material design dropdown menu
+        /// based on the selected product type.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CBXProductType_SelectedIndexChanged(object sender, EventArgs e)
         {
             // get the selected product
