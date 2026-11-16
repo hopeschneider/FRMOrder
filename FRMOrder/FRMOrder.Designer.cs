@@ -57,6 +57,7 @@
             this.BTNClearForm = new System.Windows.Forms.Button();
             this.LBXOrderItems = new System.Windows.Forms.ListBox();
             this.PBXProductImage = new System.Windows.Forms.PictureBox();
+            this.BTNClose = new System.Windows.Forms.Button();
             this.GBXDeliveryInfo.SuspendLayout();
             this.GBXCustomerInfo.SuspendLayout();
             this.GBXProductInfo.SuspendLayout();
@@ -327,7 +328,7 @@
             // 
             // BTNProcessOrder
             // 
-            this.BTNProcessOrder.Location = new System.Drawing.Point(803, 473);
+            this.BTNProcessOrder.Location = new System.Drawing.Point(598, 464);
             this.BTNProcessOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BTNProcessOrder.Name = "BTNProcessOrder";
             this.BTNProcessOrder.Size = new System.Drawing.Size(139, 47);
@@ -338,7 +339,7 @@
             // 
             // BTNClearForm
             // 
-            this.BTNClearForm.Location = new System.Drawing.Point(955, 473);
+            this.BTNClearForm.Location = new System.Drawing.Point(774, 465);
             this.BTNClearForm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BTNClearForm.Name = "BTNClearForm";
             this.BTNClearForm.Size = new System.Drawing.Size(139, 47);
@@ -368,11 +369,22 @@
             this.PBXProductImage.TabIndex = 8;
             this.PBXProductImage.TabStop = false;
             // 
+            // BTNClose
+            // 
+            this.BTNClose.Location = new System.Drawing.Point(945, 464);
+            this.BTNClose.Name = "BTNClose";
+            this.BTNClose.Size = new System.Drawing.Size(139, 48);
+            this.BTNClose.TabIndex = 9;
+            this.BTNClose.Text = "Close ";
+            this.BTNClose.UseVisualStyleBackColor = true;
+            this.BTNClose.Click += new System.EventHandler(this.BTNClose_Click);
+            // 
             // FRMOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1125, 543);
+            this.Controls.Add(this.BTNClose);
             this.Controls.Add(this.PBXProductImage);
             this.Controls.Add(this.LBXOrderItems);
             this.Controls.Add(this.BTNClearForm);
@@ -426,6 +438,7 @@
         private System.Windows.Forms.Button BTNClearForm;
         private System.Windows.Forms.ListBox LBXOrderItems;
         private System.Windows.Forms.PictureBox PBXProductImage;
+        private System.Windows.Forms.Button BTNClose;
     }
 }
 

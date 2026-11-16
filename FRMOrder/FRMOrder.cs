@@ -291,5 +291,15 @@ namespace FRMOrder
             // Puts the focus back on the Customer Name textbox for user convenience
             TXTCustomerName.Focus();
         }
+
+        /// <summary>
+        /// This method closes the form when the "Close" button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BTNClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
