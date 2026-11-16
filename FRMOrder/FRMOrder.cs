@@ -93,7 +93,7 @@ namespace FRMOrder
 
             // Displays a message box confirming that the order has been processed successfully
             MessageBox.Show("Your order has been processed successfully!", "Order Confirmation", 
-                            MessageBoxButtons.OK, MessageBoxIcons.Information);
+                            MessageBoxButtons.OK);
             
         }
 
@@ -244,6 +244,7 @@ namespace FRMOrder
             TXTStreetAddress.Clear();
             TXTCity.Clear();
             CBXState.SelectedIndex = -1;
+            CBXState.Text = "";
             TXTZipCode.Clear();
             TXTPhoneNumber.Clear();
 
