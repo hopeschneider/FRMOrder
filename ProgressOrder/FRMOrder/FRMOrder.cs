@@ -61,7 +61,7 @@ namespace FRMOrder
                                         TXTStreetAddress,
                                         TXTCity, 
                                         TXTZipCode, 
-                                        TXTQuantity, 
+                                        //TXTQuantity, 
                                         TXTPhoneNumber};
 
             // Array of field names corresponding to the required fields for error messages
@@ -69,7 +69,7 @@ namespace FRMOrder
                                     "Street Address", 
                                     "City", 
                                     "Zip Code",
-                                    "Quantity",     
+                                    //"Quantity",     
                                     "Phone Number" };
 
             // Checks if all required fields are filled
@@ -81,11 +81,11 @@ namespace FRMOrder
                 }
             }
 
-            // Checks if the Quantity field is a positive whole number
-            if (!Validator.IsPositiveInteger(TXTQuantity.Text, "Quantity"))
-            {
-                return;
-            }
+            //// Checks if the Quantity field is a positive whole number
+            //if (!Validator.IsPositiveInteger(TXTQuantity.Text, "Quantity"))
+            //{
+            //    return;
+            //}
 
             // Checks the State combobox selection
             if (!Validator.IsPresent(CBXState.Text, "State"))
@@ -96,6 +96,14 @@ namespace FRMOrder
             // Checks if Hand Delivery is selected and if the delivery location is allowed
             if (RDOHandDelivery.Checked && !Validator.IsAllowedDeliveryLocation(TXTCity.Text, CBXState.Text))
             {
+                return;
+            }
+
+            //checks if at least one item has been added to the order
+            //and stops processing if the order is empty.
+            if (LBXOrderItems.Items.Count == 0)
+            {
+                MessageBox.Show("Please add at least one item to your order.");
                 return;
             }
 
@@ -170,7 +178,7 @@ namespace FRMOrder
             LBXOrderItems.Items.Add(strOrderItem);
 
             // clear quantity for the next item
-            //TXTQuantity.Clear();
+            TXTQuantity.Clear();
 
             // updates the running order subtotal
             decOrderSubtotal += decItemSubtotal;
