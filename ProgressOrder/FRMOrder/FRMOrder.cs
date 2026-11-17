@@ -239,6 +239,13 @@ namespace FRMOrder
             // Stores the current index integer of the selected item from the product type ComboBox.
             int intSelectedIndex = CBXProductType.SelectedIndex;
 
+            //prevents an error when no product is selected
+            if (intSelectedIndex == -1)
+            {
+                return;
+            }
+
+
             // Loops through the nested string array 'strMaterialList' using the retrieved product
             // index to add each corresponding material option into the material design CBX.
             for (int i = 0; i < strMaterialList[intSelectedIndex].Length; i++)
@@ -343,6 +350,14 @@ namespace FRMOrder
 
             // Puts the focus back on the Customer Name textbox for user convenience
             TXTCustomerName.Focus();
+
+            // Clears all order totals and resets the subtotal for a new order
+            decOrderSubtotal = 0.0m;
+
+            TXTOrderSubtotal.Clear();
+            TXTShipping.Clear();
+            TXTTax.Clear();
+            TXTOrderTotal.Clear();
         }
 
         /// <summary>
