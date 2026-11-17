@@ -170,7 +170,7 @@ namespace FRMOrder
             LBXOrderItems.Items.Add(strOrderItem);
 
             // clear quantity for the next item
-            //TXTQuantity.Clear();
+            TXTQuantity.Clear();
 
             // updates the running order subtotal
             decOrderSubtotal += decItemSubtotal;
