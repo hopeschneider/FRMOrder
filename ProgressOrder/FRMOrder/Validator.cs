@@ -5,8 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//PURPOSE: This class provides centralized validation methods for the order form.
+// It ensures all user inputs, meet business rules before processing order
+// placement.
+//INPUT: string values and control names passed from form textboxes/comboboxes
+// (TXTCustomerName, TXTQuantity, CBXProductType).
+//PROCESS: Validates data presence, numeric parsing, positive values, and valid selections.  
+//OUTPUT: Returns true if validation passed; displays custom message box error
+// dialogs and returns false if an entry error is caught. 
+//HONOR CODE: “On my honor, as an Aggie, I have neither given
+// nor received unauthorized aid on this academic
+// work.”
+
 namespace FRMOrder
 {
+
+    /// <summary>
+    /// Centrailized validation class for Coding Project 1.
+    /// Handles text presence, numeric checks, range testing, and single error dialogs.
+    /// </summary>
     public static class Validator
     {
 

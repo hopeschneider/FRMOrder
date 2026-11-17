@@ -8,13 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//AUTHORS: 
-//COURSE: 
-//FORM: 
-//PURPOSE: 
-//INPUT: 
-//PROCESS: 
-//OUTPUT: 
+//AUTHORS: Hope Schneider, Krishita Madhekar, Kiet Nguyen, Andrea Perez
+//COURSE: ISTM 250.501
+//FORM: FRMOrder
+//PURPOSE: This program is designed to transition Copperleaf Crafts
+// from paper record-keeping to a digital order management system to record
+// craft product orders, validate customer and item inputs, and calculate order totals.
+//INPUT: Customer contact info from textboxes (TXTCustomerName, TXTStreetAddress,
+// TXTCity, CBXState, TXTZipCode, TXTPhoneNumber), delivery option (RDOHandDelivery or RDOMail),
+// item selections from CBXProductType and CBXMaterialDesign,
+// and a positive integer quantity from TXTQuantity.    
+//PROCESS: BTNAddItemOrder_Click, BTNProcessOrder_Click, BTNClearForm_Click, BTNCloseForm_Click
+//OUTPUT: 1. Formatted order line items appended to LBXOrderItems
+//        2. Product preview image displayed in PBXProductImage
+//        3. Order total displayed in summary textboxes (TXTSubtotal, TXTShipping, TXTTax, TXTTotal)
+//        4. Validation error dialog messages or order success notification 
 //HONOR CODE: “On my honor, as an Aggie, I have neither given
 // nor received unauthorized aid on this academic
 // work.”
@@ -28,7 +36,14 @@ namespace FRMOrder
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// Stores the running subtotal for the current order.
+        /// </summary>
         decimal decOrderSubtotal = 0.0m;
+
+        #region Order Processing
+
         /// <summary>
         /// This method is triggered when the "Process Order" button is clicked. 
         /// It validates the input fields to ensure that all required fields are filled, 
@@ -84,9 +99,15 @@ namespace FRMOrder
                 return;
             }
 
-            //THE CODE FOR PROCESSING THE ORDER WILL GO HERE:
-            
+            // Displays a message box confirming that the order has been processed successfully
+            MessageBox.Show("Your order has been processed successfully!", "Order Confirmation",
+                            MessageBoxButtons.OK);
+
         }
+
+        #endregion
+
+        #region Add Item to Order
 
         /// <summary>
         /// This method is triggered when the "Add Item to Order" button is clicked.
@@ -115,14 +136,14 @@ namespace FRMOrder
                                                        CBXMaterialDesign.SelectedIndex);
             if (!isValid) return;
 
-            //THE CODE FOR ADDING THE ITEM TO THE ORDER WILL GO HERE:
-
-
+            // Parse the item quantity entered in the textbox into an integer
             int intQuantity = int.Parse(TXTQuantity.Text);
 
+            // Retrieve selected product and material text from the comboboxes
             string strProduct = CBXProductType.Text;
             string strMaterial = CBXMaterialDesign.Text;
 
+            // Initialize the default base price as a decimal literal
             decimal decPrice = 25.00m;
 
             // determine the product price
@@ -151,29 +172,36 @@ namespace FRMOrder
             // clear quantity for the next item
             TXTQuantity.Clear();
 
-           
+            // updates the running order subtotal
             decOrderSubtotal += decItemSubtotal;
+            
+            // sets default shipping cost and checks for hand delivery
             int intShippingCost = 10;
-
             if (RDOHandDelivery.Checked)
             {
                 intShippingCost = 10;
             }
-
+            // calculates tax and final order total
             decimal decTax =  (decOrderSubtotal + intShippingCost) * .0825m ;
             decimal decOrderTotal = decOrderSubtotal + intShippingCost + decTax;
 
-
+            // displays formatted order totals in text boxes
                 TXTOrderSubtotal.Text = decOrderSubtotal.ToString("c");
                 TXTShipping.Text = intShippingCost.ToString("c");
                 TXTTax.Text = decTax.ToString("c");
                 TXTOrderTotal.Text = decOrderTotal.ToString("c");
-
-
-
-
         }
 
+        #endregion
+
+        #region Product Type Selection
+
+        /// <summary>
+        /// This method updates the options in the material design dropdown menu
+        /// based on the selected product type.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CBXProductType_SelectedIndexChanged(object sender, EventArgs e)
         {
             // get the selected product
@@ -200,12 +228,16 @@ namespace FRMOrder
             };
 
             CBXMaterialDesign.Items.Clear();
+            // Stores the current index integer of the selected item from the product type ComboBox.
             int intSelectedIndex = CBXProductType.SelectedIndex;
 
+            // Loops through the nested string array 'strMaterialList' using the retrieved product
+            // index to add each corresponding material option into the material design CBX.
             for (int i = 0; i < strMaterialList[intSelectedIndex].Length; i++)
             {
                 CBXMaterialDesign.Items.Add(strMaterialList[intSelectedIndex][i]);
             }
+            // checks the current product and updates the PictureBox to display the corresponding image resource.
             if (strProduct == "Wood jewelry box" ||
                strProduct == "Ceramic vase")
             {
@@ -224,6 +256,15 @@ namespace FRMOrder
 
         }
 
+        #endregion
+
+        #region Form Initialization
+
+        /// <summary>
+        /// This load event initializes the product list combo box when the form opens.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FRMOrder_Load(object sender, EventArgs e)
         {
             //Creating the array that relates to the combo box for Product List
@@ -235,9 +276,56 @@ namespace FRMOrder
             }
         }
 
+        #endregion
+
+        #region Form Reset and Close
+
+        /// <summary>
+        /// This button resets the entire order form back to its default, empty state.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BTNClearForm_Click(object sender, EventArgs e)
+        {
+            // Clear all input fields and selections on the form
+            TXTCustomerName.Clear();
+            TXTStreetAddress.Clear();
+            TXTCity.Clear();
+            CBXState.SelectedIndex = -1;
+            CBXState.Text = "";
+            TXTZipCode.Clear();
+            TXTPhoneNumber.Clear();
+
+            // Clear the delivery option radio buttons
+            RDOMail.Checked = false;
+            RDOHandDelivery.Checked = false;
+
+            // Clear the product selection and related fields
+            CBXProductType.SelectedIndex = -1;
+            CBXMaterialDesign.Items.Clear();
+            CBXMaterialDesign.Text = "";
+            TXTQuantity.Clear();
+
+            // Clears the product image 
+            PBXProductImage.Image = null;
+
+            // Clear the order items list
+            LBXOrderItems.Items.Clear();
+
+            // Puts the focus back on the Customer Name textbox for user convenience
+            TXTCustomerName.Focus();
+        }
+
+        /// <summary>
+        /// This button closes the form.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BTNClose_Click(object sender, EventArgs e)
         {
             Close();
         }
+
+        #endregion
     }
 }
