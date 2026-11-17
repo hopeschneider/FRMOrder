@@ -170,7 +170,7 @@ namespace FRMOrder
             LBXOrderItems.Items.Add(strOrderItem);
 
             // clear quantity for the next item
-            TXTQuantity.Clear();
+            //TXTQuantity.Clear();
 
             // updates the running order subtotal
             decOrderSubtotal += decItemSubtotal;
@@ -179,7 +179,7 @@ namespace FRMOrder
             int intShippingCost = 10;
             if (RDOHandDelivery.Checked)
             {
-                intShippingCost = 10;
+                intShippingCost = 15;
             }
             // calculates tax and final order total
             decimal decTax =  (decOrderSubtotal + intShippingCost) * .0825m ;
@@ -267,6 +267,27 @@ namespace FRMOrder
         /// <param name="e"></param>
         private void FRMOrder_Load(object sender, EventArgs e)
         {
+
+            //Creating the array that relates to the combo box for States
+            string[] strStateList =
+                {
+                "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE",
+                "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS",
+                "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS",
+                "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY",
+                "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+                "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV",
+                "WI", "WY"
+                };
+
+            // Add all states to the State ComboBox
+            for (int i = 0; i < strStateList.Length; i++)
+            {
+                CBXState.Items.Add(strStateList[i]);
+            }
+
+
+
             //Creating the array that relates to the combo box for Product List
             string[] strProductList = { "Wood jewelry box", "Ceramic vase", "Handmade candle", "Stained glass frame", "Knitted scarf", "Leather wallet" };
             //adding the products into the combo box CBXProductType

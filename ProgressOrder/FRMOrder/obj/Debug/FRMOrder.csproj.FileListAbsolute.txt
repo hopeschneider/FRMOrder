@@ -9,3 +9,13 @@ C:\Users\krish\OneDrive\Desktop\C# Projects\mainFRMOrder\FRMOrder\obj\Debug\FRMO
 C:\Users\krish\OneDrive\Desktop\C# Projects\mainFRMOrder\FRMOrder\obj\Debug\FRMOrder.exe
 C:\Users\krish\OneDrive\Desktop\C# Projects\mainFRMOrder\FRMOrder\obj\Debug\FRMOrder.pdb
 C:\Users\krish\OneDrive\Desktop\C# Projects\mainFRMOrder\FRMOrder\obj\Debug\FRMOrder.exe.config
+C:\Users\kietc\source\repos\FRMOrder\ProgressOrder\FRMOrder\bin\Debug\FRMOrder.exe.config
+C:\Users\kietc\source\repos\FRMOrder\ProgressOrder\FRMOrder\bin\Debug\FRMOrder.exe
+C:\Users\kietc\source\repos\FRMOrder\ProgressOrder\FRMOrder\bin\Debug\FRMOrder.pdb
+C:\Users\kietc\source\repos\FRMOrder\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.csproj.AssemblyReference.cache
+C:\Users\kietc\source\repos\FRMOrder\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.FRMOrder.resources
+C:\Users\kietc\source\repos\FRMOrder\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.Properties.Resources.resources
+C:\Users\kietc\source\repos\FRMOrder\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.csproj.GenerateResource.cache
+C:\Users\kietc\source\repos\FRMOrder\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.csproj.CoreCompileInputs.cache
+C:\Users\kietc\source\repos\FRMOrder\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.exe
+C:\Users\kietc\source\repos\FRMOrder\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.pdb
