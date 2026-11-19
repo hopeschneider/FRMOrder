@@ -327,5 +327,33 @@ namespace FRMOrder
         }
 
         #endregion
+
+        private bool IsValidData()
+        {
+            string strErrorMessage = "";
+
+            // build our potential error message
+            // 1. Code must be present
+            // 2. Description must be present
+            // 3. Price must be decimal
+            // 4. Prict must be in a certain range.
+            //strErrorMessage += Validator.IsPresent(TXTCode.Text, "Product Code");
+            strErrorMessage += Validator.IsPresent(TXTCustomerName.Text, TXTCustomerName.Tag?.ToString() ?? "Customer Name");
+            strErrorMessage += Validator.IsPresent(TXTStreetAddress.Text, TXTStreetAddress.Tag?.ToString() ?? "Street Address");
+            strErrorMessage += Validator.IsPresent(TXTCity.Text, TXTCity.Tag?.ToString() ?? "City Name");
+            strErrorMessage += Validator.IsPresent(TXTZipCode.Text, TXTZipCode.Tag?.ToString() ?? "Zip Code");
+            strErrorMessage += Validator.IsPresent(TXTPhoneNumber.Text, TXTPhoneNumber.Tag?.ToString() ?? "Phone Number");
+            strErrorMessage += Validator.IsPresent(TXTQuantity.Text, TXTQuantity.Tag?.ToString() ?? "Quantity");
+
+            if (strErrorMessage != "") // if we have one or more errors
+            {
+                MessageBox.Show(strErrorMessage);
+                return false; // we do not have a valid new product
+            }
+            return true; // we have no error. we have a valid new product. 
+
+            // NEED TO CALL METHOD UNDER PROCESS ORDER BTN (or somewhere else)
+        }
+       
     }
 }
