@@ -8,13 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//AUTHORS: 
-//COURSE: 
-//FORM: 
-//PURPOSE: 
-//INPUT: 
-//PROCESS: 
-//OUTPUT: 
+//AUTHORS: Hope Schneider, Krishita Madhekar, Kiet Nguyen, Andrea Perez
+//COURSE: ISTM 250.501
+//FORM: FRMOrder
+//PURPOSE: This program is designed to transition Copperleaf Crafts
+// from paper record-keeping to a digital order management system to record
+// craft product orders, validate customer and item inputs, and calculate order totals.
+//INPUT: Customer contact info from textboxes (TXTCustomerName, TXTStreetAddress,
+// TXTCity, CBXState, TXTZipCode, TXTPhoneNumber), delivery option (RDOHandDelivery or RDOMail),
+// item selections from CBXProductType and CBXMaterialDesign,
+// and a positive integer quantity from TXTQuantity.                                          
+//PROCESS: BTNAddItemOrder_Click, BTNProcessOrder_Click, BTNClearForm_Click, BTNCloseForm_Click
+//OUTPUT: 1. Formatted order line items appended to LBXOrderItems
+//        2. Product preview image displayed in PBXProductImage
+//        3. Order total displayed in summary textboxes (TXTSubtotal, TXTShipping, TXTTax, TXTTotal)
+//        4. Validation error dialog messages or order success notification message box
 //HONOR CODE: “On my honor, as an Aggie, I have neither given
 // nor received unauthorized aid on this academic
 // work.”
@@ -28,6 +36,9 @@ namespace FRMOrder
         {
             InitializeComponent();
         }
+
+        #region Order Processing
+
         /// <summary>
         /// This method is triggered when the "Process Order" button is clicked. 
         /// It validates the input fields to ensure that all required fields are filled, 
@@ -83,8 +94,15 @@ namespace FRMOrder
                 return;
             }
 
-            //THE CODE FOR PROCESSING THE ORDER WILL GO HERE:
+            // Displays a message box confirming that the order has been processed successfully
+            MessageBox.Show("Your order has been processed successfully!", "Order Confirmation", 
+                            MessageBoxButtons.OK);
+            
         }
+
+        #endregion
+
+        #region Order Add Item Management
 
         /// <summary>
         /// This method is triggered when the "Add Item to Order" button is clicked.
@@ -113,7 +131,7 @@ namespace FRMOrder
                                                        CBXMaterialDesign.SelectedIndex);
             if (!isValid) return;
 
-            //THE CODE FOR ADDING THE ITEM TO THE ORDER WILL GO HERE:
+           
 
 
             int intQuantity = int.Parse(TXTQuantity.Text);
@@ -150,6 +168,14 @@ namespace FRMOrder
             TXTQuantity.Clear();
         }
 
+        #endregion
+
+        /// <summary>
+        /// This method updates the options in the material design dropdown menu
+        /// based on the selected product type.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CBXProductType_SelectedIndexChanged(object sender, EventArgs e)
         {
             // get the selected product
@@ -224,6 +250,56 @@ namespace FRMOrder
             {
                 PBXProductImage.Image = Properties.Resources.textile;
             }
+        }
+
+        /// <summary>
+        /// This method is triggered when the "Clear Form" button is clicked. 
+        /// It clears all input fields, selections, and the order items list 
+        /// on the form, effectively resetting the form to its initial state. 
+        /// After clearing, it sets the focus back to the Customer Name 
+        /// textbox for user convenience.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BTNClearForm_Click(object sender, EventArgs e)
+        {
+            // Clear all input fields and selections on the form
+            TXTCustomerName.Clear();
+            TXTStreetAddress.Clear();
+            TXTCity.Clear();
+            CBXState.SelectedIndex = -1;
+            CBXState.Text = "";
+            TXTZipCode.Clear();
+            TXTPhoneNumber.Clear();
+
+            // Clear the delivery option radio buttons
+            RDOMail.Checked = false;
+            RDOHandDelivery.Checked = false;
+
+            // Clear the product selection and related fields
+            CBXProductType.SelectedIndex = -1;
+            CBXMaterialDesign.Items.Clear();
+            CBXMaterialDesign.Text = "";
+            TXTQuantity.Clear();
+
+            // Clears the product image 
+            PBXProductImage.Image = null;
+
+            // Clear the order items list
+            LBXOrderItems.Items.Clear();
+
+            // Puts the focus back on the Customer Name textbox for user convenience
+            TXTCustomerName.Focus();
+        }
+
+        /// <summary>
+        /// This method closes the form when the "Close" button is clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BTNClose_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -7,6 +7,10 @@ using System.Windows.Forms;
 
 namespace FRMOrder
 {
+    /// <summary>
+    /// Centrailized validation class for Coding Project 1.
+    /// Handles text presence, numeric checks, range testing, and single error dialogs.
+    /// </summary>
     public static class Validator
     {
 
