@@ -84,6 +84,25 @@ namespace FRMOrder
             }
         }
 
+        /// <summary>
+        /// This method checks if a string contains only numeric characters (digits).
+        /// Primarily used for validating fields like Zip Code and Phone Number.
+        /// </summary>
+        /// <param name="strValue"></param>
+        /// <returns></returns>
+        public static bool blnIsNumbersOnly(string strValue)
+        {
+            for (int i = 0; i < strValue.Length; i++)
+            {
+                if (!char.IsDigit(strValue[i]))
+                { 
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         #endregion
 
         #region High-Level Form Validation Routines
