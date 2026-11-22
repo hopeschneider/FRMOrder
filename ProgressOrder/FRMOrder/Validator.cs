@@ -39,8 +39,6 @@ namespace FRMOrder
         {
             if (string.IsNullOrWhiteSpace(strTestValue))
             {
-                MessageBox.Show($"{strControlName} is a required field.", "Entry Error",
-                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;
@@ -72,16 +70,15 @@ namespace FRMOrder
             string city = strCity.Trim().ToLower();
             string state = strState.Trim().ToLower();
 
-           if((city == "bryan" || city == "college station") && state == "tx")
+            // Checks if the city is either "bryan" or "college station" and the state is "tx"
+            // allowing hand delivery.
+            if ((city == "bryan" || city == "college station") && state == "tx")
             {
                 return true;
             }
-            else
-            {
-                MessageBox.Show("Hand delivery is only available in Bryan and College Station, TX.", "Delivery Error",
-                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
+           
+            return false;
+            
         }
 
         /// <summary>
