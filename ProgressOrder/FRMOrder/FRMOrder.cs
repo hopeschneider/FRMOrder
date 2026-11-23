@@ -56,61 +56,15 @@ namespace FRMOrder
         /// <param name="e"></param>
         private void BTNProcessOrder_Click(object sender, EventArgs e)
         {
-            //Checks if all required fields are filled and valid
-            TextBox[] requiredFields = {TXTCustomerName, 
-                                        TXTStreetAddress,
-                                        TXTCity, 
-                                        TXTZipCode, 
-                                        //TXTQuantity, 
-                                        TXTPhoneNumber};
-
-            // Array of field names corresponding to the required fields for error messages
-            string[] fieldNames = { "Customer Name",
-                                    "Street Address", 
-                                    "City", 
-                                    "Zip Code",
-                                    //"Quantity",     
-                                    "Phone Number" };
-
-            // Checks if all required fields are filled
-            for (int i = 0; i < requiredFields.Length; i++)
+            // Runs all field and delivery validations (displays one message box if invalid)
+            if (!IsValidData())
             {
-                if (!Validator.IsPresent(requiredFields[i].Text, fieldNames[i]))
-                {
-                    return;
-                }
-            }
-
-            //// Checks if the Quantity field is a positive whole number
-            //if (!Validator.IsPositiveInteger(TXTQuantity.Text, "Quantity"))
-            //{
-            //    return;
-            //}
-
-            // Checks the State combobox selection
-            if (!Validator.IsPresent(CBXState.Text, "State"))
-            {
-                return;
-            }
-
-            // Checks if Hand Delivery is selected and if the delivery location is allowed
-            if (RDOHandDelivery.Checked && !Validator.IsAllowedDeliveryLocation(TXTCity.Text, CBXState.Text))
-            {
-                return;
-            }
-
-            //checks if at least one item has been added to the order
-            //and stops processing if the order is empty.
-            if (LBXOrderItems.Items.Count == 0)
-            {
-                MessageBox.Show("Please add at least one item to your order.");
                 return;
             }
 
             // Displays a message box confirming that the order has been processed successfully
             MessageBox.Show("Your order has been processed successfully!", "Order Confirmation",
                             MessageBoxButtons.OK);
-
         }
 
         #endregion
@@ -126,23 +80,29 @@ namespace FRMOrder
         /// <param name="e"></param>
         private void BTNAddItemToOrder_Click(object sender, EventArgs e)
         {
-            //Checks if the Quantity field is filled
-            if(!Validator.IsPresent(TXTQuantity.Text, "Quantity"))
+            // option one
+            string strItemError = "";
+
+            // 1. Validate Product Type and Material/Design selections
+            strItemError += Validator.ValidateItemEntry(CBXProductType.SelectedIndex, CBXMaterialDesign.SelectedIndex);
+
+            // 2. Validate Quantity (only check IsPositiveInteger if Quantity is not blank)
+            string strQtyPresent = Validator.IsPresent(TXTQuantity.Text, "Quantity");
+            if (strQtyPresent == "")
             {
-                return;
+                strItemError += Validator.IsPositiveInteger(TXTQuantity.Text, "Quantity");
+            }
+            else
+            {
+                strItemError += strQtyPresent;
             }
 
-            //Checks if the Quantity field is a positive whole number
-            if (!Validator.IsPositiveInteger(TXTQuantity.Text, "Quantity"))
+            // 3. Display combined MessageBox if any errors were collected
+            if (strItemError != "")
             {
-                return;
+                MessageBox.Show(strItemError, "Entry Error");
+                return; //stop execution so the invalid item is not added
             }
-
-            //Checks if CBXProductType and CBXMaterialDesign are selected before adding item to the order
-            //and stops addition if an error is detected.
-            bool isValid = Validator.ValidateItemEntry(CBXProductType.SelectedIndex,
-                                                       CBXMaterialDesign.SelectedIndex);
-            if (!isValid) return;
 
             // Parse the item quantity entered in the textbox into an integer
             int intQuantity = int.Parse(TXTQuantity.Text);
@@ -198,6 +158,11 @@ namespace FRMOrder
                 TXTShipping.Text = intShippingCost.ToString("c");
                 TXTTax.Text = decTax.ToString("c");
                 TXTOrderTotal.Text = decOrderTotal.ToString("c");
+
+            // Clear item inputs for the next item
+            TXTQuantity.Clear();
+            CBXProductType.SelectedIndex = -1;
+            CBXMaterialDesign.SelectedIndex = -1;
         }
 
         #endregion
@@ -371,5 +336,71 @@ namespace FRMOrder
         }
 
         #endregion
+
+        #region One Message Box
+
+        /// <summary>
+        /// Validates all required customer fields, delivery options, and order items
+        /// before processing the order. Displays a combined error message box if any validation rules fail.
+        /// </summary>
+        /// <returns></returns>
+        private bool IsValidData()
+        {
+            string strErrorMessage = "";
+
+            // 1. Validate required customer text fields
+            strErrorMessage += Validator.IsPresent(TXTCustomerName.Text, TXTCustomerName.Tag?.ToString() ?? "Customer Name");
+            strErrorMessage += Validator.IsPresent(TXTStreetAddress.Text, TXTStreetAddress.Tag?.ToString() ?? "Street Address");
+            strErrorMessage += Validator.IsPresent(TXTCity.Text, TXTCity.Tag?.ToString() ?? "City");
+            strErrorMessage += Validator.IsPresent(TXTZipCode.Text, TXTZipCode.Tag?.ToString() ?? "Zip Code");
+            strErrorMessage += Validator.IsPresent(TXTPhoneNumber.Text, TXTPhoneNumber.Tag?.ToString() ?? "Phone Number");
+            
+            // 2. Validate state, product type, and material/design selection
+            if (CBXState.SelectedIndex == -1)
+            {
+                strErrorMessage += "State is a required field.\n";
+            }
+            
+            // Should this be included for BTNProcessOrder?
+            //if (CBXProductType.SelectedIndex == -1)
+            //{
+            //    strErrorMessage += "Product Type is a required field.\n";
+            //}
+
+            //if (CBXMaterialDesign.SelectedIndex == -1)
+            //{
+            //    strErrorMessage += "Material / Design is a required field.\n";
+            //}
+            
+            // 3. Validate Delivery Option & Hand Delivery Location (Bryan or College Station, TX)
+            if (!RDOMail.Checked && !RDOHandDelivery.Checked)
+            {
+                strErrorMessage += "Please select a delivery option.\n";
+            }
+            else if (RDOHandDelivery.Checked)
+            {
+                // Only check delivery area if City and State were actually entered
+                if (!string.IsNullOrWhiteSpace(TXTCity.Text) && CBXState.SelectedIndex != -1)
+                {
+                    strErrorMessage += Validator.IsAllowedDeliveryLocation(TXTCity.Text, CBXState.Text);
+                }
+            }
+            
+            // 4. Validate that at least one item has been added to the order
+            if (LBXOrderItems.Items.Count == 0)
+            {
+                strErrorMessage += "Please add at least one item to your order.\n";
+            }
+            
+            // 5. Display one combined MessageBox if any errors were collected
+            if (strErrorMessage != "") // if we have one or more errors
+            {
+                MessageBox.Show(strErrorMessage, "Entry Error");
+                return false; // we do not have a valid new product
+            }
+            return true; // we have no error. we have a valid new product.
+
+        #endregion
+        }
     }
 }
