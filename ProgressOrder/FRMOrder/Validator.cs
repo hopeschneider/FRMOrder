@@ -35,15 +35,14 @@ namespace FRMOrder
         /// <param name="strTestValue"></param>
         /// <param name="strControlName"></param>
         /// <returns></returns>
-        public static bool IsPresent(string strTestValue, string strControlName)
+        public static string IsPresent(string strTestValue, string strControlName)
         {
+            string strMessage = "";
             if (string.IsNullOrWhiteSpace(strTestValue))
             {
-                MessageBox.Show($"{strControlName} is a required field.", "Entry Error",
-                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                strMessage += strControlName + " is a required field.\n";
             }
-            return true;
+            return strMessage;
         }
         /// <summary>
         /// Checks if a text field is a positive whole number/integer.
@@ -51,15 +50,14 @@ namespace FRMOrder
         /// <param name="strTestValue"></param>
         /// <param name="strControlName"></param>
         /// <returns></returns>
-        public static bool IsPositiveInteger(string strTestValue, string strControlName)
+        public static string IsPositiveInteger(string strTestValue, string strControlName)
         {
+            string strMessage = "";
             if (!int.TryParse(strTestValue, out int intValue) || intValue <= 0)
             {
-                MessageBox.Show($"{strControlName} must be a positive whole number.", "Entry Error",
-                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                strMessage += strControlName + " must be a valid integer value.\n";
             }
-            return true;
+            return strMessage;
         }
         /// <summary>
         /// Checks if the delivery location is allowed (Bryan or College Station, TX). 
@@ -67,20 +65,18 @@ namespace FRMOrder
         /// <param name="strCity"></param>
         /// <param name="strState"></param>
         /// <returns></returns>
-        public static bool IsAllowedDeliveryLocation(string strCity, string strState)
+        public static string IsAllowedDeliveryLocation(string strCity, string strState)
         {
             string city = strCity.Trim().ToLower();
             string state = strState.Trim().ToLower();
 
            if((city == "bryan" || city == "college station") && state == "tx")
             {
-                return true;
+                return "";
             }
             else
             {
-                MessageBox.Show("Hand delivery is only available in Bryan and College Station, TX.", "Delivery Error",
-                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                return "Hand delivery is only available in Bryan and College Station, TX.\n";
             }
         }
 
@@ -95,22 +91,19 @@ namespace FRMOrder
         /// <param name="intProductIndex"></param>
         /// <param name="intMaterialIndex"></param>
         /// <returns></returns>
-        public static bool ValidateItemEntry(int intProductIndex, int intMaterialIndex)
+        public static string ValidateItemEntry(int intProductIndex, int intMaterialIndex)
         {
+            string strMessage = "";
             if(intProductIndex < 0)
             {
-                MessageBox.Show("Please select a Product Type.", "Selection Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                strMessage += "Please select a Product Type.\n";
             }
 
             if(intMaterialIndex < 0)
             {
-                MessageBox.Show("Please select a Material or Design option.", "Selection Error",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                strMessage += "Please select a Material or Design option.\n";
             }
-            return true;
+            return strMessage;
         }
 
         #endregion
