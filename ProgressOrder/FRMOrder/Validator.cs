@@ -39,9 +39,7 @@ namespace FRMOrder
         {
             if (string.IsNullOrWhiteSpace(strTestValue))
             {
-                MessageBox.Show($"{strControlName} is a required field.", "Entry Error",
-                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                 return false;
             }
             return true;
         }
@@ -78,8 +76,6 @@ namespace FRMOrder
             }
             else
             {
-                MessageBox.Show("Hand delivery is only available in Bryan and College Station, TX.", "Delivery Error",
-                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
@@ -113,6 +109,22 @@ namespace FRMOrder
             return true;
         }
 
+        /// <summary>
+        /// This method connects back to make sure the zipcode and the phone number are only numbers.
+        /// </summary>
+        /// <param name="strValue"></param>
+        /// <returns></returns>
+        public static bool blnIsNumbersOnly(string strValue)
+        {
+            for (int i=0; i<strValue.Length; i++)
+            {
+                if (!char.IsDigit(strValue[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
         #endregion
 
     }

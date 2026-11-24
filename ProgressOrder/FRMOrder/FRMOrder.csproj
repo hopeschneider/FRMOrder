@@ -48,17 +48,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FRMOrder.cs">
+    <Compile Include="..\..\..\..\Coding Project 2 - mostly complete!\FRMOrder.cs">
+      <SubType>Form</SubType>
+      <Link>Coding Project 2 - mostly complete\FRMOrder.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\Coding Project 2 - mostly complete!\FRMOrder.Designer.cs">
+      <DependentUpon>FRMOrder.cs</DependentUpon>
+      <Link>Coding Project 2 - mostly complete\FRMOrder.Designer.cs</Link>
+    </Compile>
+    <Compile Include="FRMInventory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FRMOrder.Designer.cs">
-      <DependentUpon>FRMOrder.cs</DependentUpon>
+    <Compile Include="FRMInventory.Designer.cs">
+      <DependentUpon>FRMInventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="InventoryData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validator.cs" />
-    <EmbeddedResource Include="FRMOrder.resx">
+    <EmbeddedResource Include="..\..\..\..\Coding Project 2 - mostly complete!\FRMOrder.resx">
       <DependentUpon>FRMOrder.cs</DependentUpon>
+      <Link>Coding Project 2 - mostly complete\FRMOrder.resx</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRMInventory.resx">
+      <DependentUpon>FRMInventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

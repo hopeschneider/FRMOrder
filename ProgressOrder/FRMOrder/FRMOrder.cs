@@ -42,6 +42,11 @@ namespace FRMOrder
         /// </summary>
         decimal decOrderSubtotal = 0.0m;
 
+        //Stores the product indexes for items added to the order.
+        List<int> lstProductIndexes = new List<int>();
+
+        //Stores the quantites for the items added to the order.
+        List<int> lstQuantites = new List<int>();
         #region Order Processing
 
         /// <summary>
@@ -56,52 +61,152 @@ namespace FRMOrder
         /// <param name="e"></param>
         private void BTNProcessOrder_Click(object sender, EventArgs e)
         {
-            //Checks if all required fields are filled and valid
-            TextBox[] requiredFields = {TXTCustomerName, 
-                                        TXTStreetAddress,
-                                        TXTCity, 
-                                        TXTZipCode, 
-                                        TXTQuantity, 
-                                        TXTPhoneNumber};
+            ////Checks if all required fields are filled and valid
+            //TextBox[] requiredFields = {TXTCustomerName, 
+            //                            TXTStreetAddress,
+            //                            TXTCity, 
+            //                            TXTZipCode, 
+            //                            TXTQuantity, 
+            //                            TXTPhoneNumber};
 
-            // Array of field names corresponding to the required fields for error messages
-            string[] fieldNames = { "Customer Name",
-                                    "Street Address", 
-                                    "City", 
-                                    "Zip Code",
-                                    "Quantity",     
-                                    "Phone Number" };
+            //// Array of field names corresponding to the required fields for error messages
+            //string[] fieldNames = { "Customer Name",
+            //                        "Street Address", 
+            //                        "City", 
+            //                        "Zip Code",
+            //                        "Quantity",     
+            //                        "Phone Number" };
 
-            // Checks if all required fields are filled
-            for (int i = 0; i < requiredFields.Length; i++)
+            //// Checks if all required fields are filled
+            //for (int i = 0; i < requiredFields.Length; i++)
+            //{
+            //    if (!Validator.IsPresent(requiredFields[i].Text, fieldNames[i]))
+            //    {
+            //        return;
+            //    }
+            //}
+
+            //// Checks if the Quantity field is a positive whole number
+            //if (!Validator.IsPositiveInteger(TXTQuantity.Text, "Quantity"))
+            //{
+            //    return;
+            //}
+
+            //// Checks the State combobox selection
+            //if (!Validator.IsPresent(CBXState.Text, "State"))
+            //{
+            //    return;
+            //}
+
+            //// Checks if Hand Delivery is selected and if the delivery location is allowed
+            //if (RDOHandDelivery.Checked && !Validator.IsAllowedDeliveryLocation(TXTCity.Text, CBXState.Text))
+            //{
+            //    return;
+            //}
+
+            //// Displays a message box confirming that the order has been processed successfully
+            //MessageBox.Show("Your order has been processed successfully!", "Order Confirmation",
+            //                MessageBoxButtons.OK);
+
+            // Stores all validation errors in one message
+            string strErrorMessage = "";
+
+            // Stores required customer fields
+            TextBox[] txtRequiredFields = { TXTCustomerName,
+                                            TXTStreetAddress,
+                                            TXTCity,
+                                            TXTZipCode,
+                                            TXTPhoneNumber };
+
+            // Stores field names for error messages
+            string[] strFieldNames = { "Customer Name",
+                                       "Street Address",
+                                       "City",
+                                       "Zip Code",
+                                       "Phone Number" };
+
+
+            // Checks all required customer fields
+            for (int i = 0; i < txtRequiredFields.Length; i++)
             {
-                if (!Validator.IsPresent(requiredFields[i].Text, fieldNames[i]))
+                if (!Validator.IsPresent(txtRequiredFields[i].Text, strFieldNames[i]))
                 {
-                    return;
+                    strErrorMessage += strFieldNames[i] + " is required.\n";
                 }
             }
 
-            // Checks if the Quantity field is a positive whole number
-            if (!Validator.IsPositiveInteger(TXTQuantity.Text, "Quantity"))
-            {
-                return;
-            }
-
-            // Checks the State combobox selection
+            // Checks that a state is selected
             if (!Validator.IsPresent(CBXState.Text, "State"))
             {
-                return;
+                strErrorMessage += "State is required.\n";
             }
 
-            // Checks if Hand Delivery is selected and if the delivery location is allowed
-            if (RDOHandDelivery.Checked && !Validator.IsAllowedDeliveryLocation(TXTCity.Text, CBXState.Text))
+            // Checks that a delivery option is selected
+            if (!RDOMail.Checked && !RDOHandDelivery.Checked)
             {
+                strErrorMessage += "Please select a delivery option.\n";
+            }
+
+            // Checks if Hand Delivery is allowed
+            if (RDOHandDelivery.Checked &&
+                !string.IsNullOrWhiteSpace(TXTCity.Text) &&
+                !string.IsNullOrWhiteSpace(CBXState.Text) &&
+                !Validator.IsAllowedDeliveryLocation(TXTCity.Text, CBXState.Text))
+            {
+                strErrorMessage +=
+                    "Hand Delivery is only available in Bryan or College Station, TX.\n";
+            }
+
+            // Checks that ZIP Code contains only numbers
+            if (!string.IsNullOrWhiteSpace(TXTZipCode.Text) &&
+                !Validator.blnIsNumbersOnly(TXTZipCode.Text))
+            {
+                strErrorMessage += "Zip Code must contain numbers only.\n";
+            }
+
+            // Checks that Phone Number contains only numbers
+            if (!string.IsNullOrWhiteSpace(TXTPhoneNumber.Text) &&
+                !Validator.blnIsNumbersOnly(TXTPhoneNumber.Text))
+            {
+                strErrorMessage += "Phone Number must contain numbers only.\n";
+            }
+
+            // Checks that at least one item has been added
+            if (LBXOrderItems.Items.Count == 0)
+            {
+                strErrorMessage += "Please add at least one item to the order.\n";
+            }
+
+            // Displays all validation errors in one MessageBox
+            if (strErrorMessage != "")
+            {
+                MessageBox.Show(strErrorMessage, "Entry Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Displays a message box confirming that the order has been processed successfully
-            MessageBox.Show("Your order has been processed successfully!", "Order Confirmation",
-                            MessageBoxButtons.OK);
+            //Checks if enough inventory is available for the entire order
+            if(!InventoryData.HasEnoughInventoryForOrder(lstProductIndexes, lstQuantites))
+            {
+                MessageBox.Show("Not enough ingredients are available to complete the order.",
+                                "Inventory Error", MessageBoxButtons.OK);
+                return;
+            }
+
+            //Deducts ingredients for each product in the order
+            for(int i=0; i< lstProductIndexes.Count; i++)
+            {
+                InventoryData.DeductIngredients(lstProductIndexes[i], lstQuantites[i]);
+            }
+
+            // Confirms successful order processing
+            MessageBox.Show("Your order has been processed successfully!",
+                            "Order Confirmation", MessageBoxButtons.OK);
+
+            // Resets the form after successful processing
+            BTNClearForm_Click(sender, e);
+
+
 
         }
 
@@ -121,6 +226,7 @@ namespace FRMOrder
             //Checks if the Quantity field is filled
             if(!Validator.IsPresent(TXTQuantity.Text, "Quantity"))
             {
+                MessageBox.Show("Quantity is required.", "Entry Error", MessageBoxButtons.OK);
                 return;
             }
 
@@ -169,27 +275,35 @@ namespace FRMOrder
 
             LBXOrderItems.Items.Add(strOrderItem);
 
+            //Saves the selected product and quantity for inventory tracking
+            lstProductIndexes.Add(CBXProductType.SelectedIndex);
+            lstQuantites.Add(intQuantity);
+
             // clear quantity for the next item
             TXTQuantity.Clear();
 
             // updates the running order subtotal
             decOrderSubtotal += decItemSubtotal;
-            
-            // sets default shipping cost and checks for hand delivery
-            int intShippingCost = 10;
-            if (RDOHandDelivery.Checked)
-            {
-                intShippingCost = 10;
-            }
-            // calculates tax and final order total
-            decimal decTax =  (decOrderSubtotal + intShippingCost) * .0825m ;
-            decimal decOrderTotal = decOrderSubtotal + intShippingCost + decTax;
 
-            // displays formatted order totals in text boxes
-                TXTOrderSubtotal.Text = decOrderSubtotal.ToString("c");
-                TXTShipping.Text = intShippingCost.ToString("c");
-                TXTTax.Text = decTax.ToString("c");
-                TXTOrderTotal.Text = decOrderTotal.ToString("c");
+            // Calls the CalculateTotals method to compute and display the order totals
+            CalculateTotals();
+
+
+            //// sets default shipping cost and checks for hand delivery
+            //int intShippingCost = 10;
+            //if (RDOHandDelivery.Checked)
+            //{
+            //    intShippingCost = 10;
+            //}
+            //// calculates tax and final order total
+            //decimal decTax =  (decOrderSubtotal + intShippingCost) * .0825m ;
+            //decimal decOrderTotal = decOrderSubtotal + intShippingCost + decTax;
+
+            //// displays formatted order totals in text boxes
+            //    TXTOrderSubtotal.Text = decOrderSubtotal.ToString("c");
+            //    TXTShipping.Text = intShippingCost.ToString("c");
+            //    TXTTax.Text = decTax.ToString("c");
+            //    TXTOrderTotal.Text = decOrderTotal.ToString("c");
         }
 
         #endregion
@@ -228,8 +342,15 @@ namespace FRMOrder
             };
 
             CBXMaterialDesign.Items.Clear();
+
             // Stores the current index integer of the selected item from the product type ComboBox.
             int intSelectedIndex = CBXProductType.SelectedIndex;
+
+            // Prevents an array error when no product is selected
+            if(intSelectedIndex <0)
+            {
+                return;
+            }
 
             // Loops through the nested string array 'strMaterialList' using the retrieved product
             // index to add each corresponding material option into the material design CBX.
@@ -267,6 +388,22 @@ namespace FRMOrder
         /// <param name="e"></param>
         private void FRMOrder_Load(object sender, EventArgs e)
         {
+            // Creates an array containing all 50 state abbreviations
+            string[] strStates = { "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE",
+                                   "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS",
+                                   "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS",
+                                   "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY",
+                                   "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+                                   "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV",
+                                   "WI", "WY"
+                                 };
+
+            // Adds all state abbreviations to the State ComboBox
+            for (int i = 0; i < strStates.Length; i++)
+            {
+                CBXState.Items.Add(strStates[i]);
+            }
+
             //Creating the array that relates to the combo box for Product List
             string[] strProductList = { "Wood jewelry box", "Ceramic vase", "Handmade candle", "Stained glass frame", "Knitted scarf", "Leather wallet" };
             //adding the products into the combo box CBXProductType
@@ -312,8 +449,101 @@ namespace FRMOrder
             // Clear the order items list
             LBXOrderItems.Items.Clear();
 
+            //Clears the saved products and quantities
+            lstProductIndexes.Clear();
+            lstQuantites.Clear();
+
+            // Reset the order totals
+            ClearOrderSummary();
+
+            // Reset the running subtotal
+            decOrderSubtotal = 0.0m;
+
             // Puts the focus back on the Customer Name textbox for user convenience
             TXTCustomerName.Focus();
+        }
+
+        /// <summary>
+        /// This method allows you to reuse it, clearing all order summary totals.
+        /// </summary>
+        private void ClearOrderSummary()
+        {
+            TXTOrderSubtotal.Clear();
+            TXTShipping.Clear();
+            TXTTax.Clear();
+            TXTOrderTotal.Clear();
+        }
+
+        /// <summary>
+        /// Calcualtes and displays the order subtotal, shipping, tax and order total.
+        /// Clears the order summary if no items were added.
+        /// </summary>
+        private void CalculateTotals()
+        {
+            // Clears the order summary if no items have been added.
+            if (LBXOrderItems.Items.Count == 0)
+            {
+                ClearOrderSummary();
+                return;
+            }
+
+            decimal decShippingCost = 10.00m; // Default shipping cost for mail delivery
+
+            if (RDOHandDelivery.Checked)
+            {
+                // If hand delivery is selected, set shipping cost to $15.00
+                decShippingCost = 15.00m;
+            }
+
+            // Calculates tax and final order total
+            decimal decTax = (decOrderSubtotal + decShippingCost) * 0.0825m;
+            decimal decOrderTotal = decOrderSubtotal + decShippingCost + decTax;
+
+            // Displays formatted order totals in text boxes as currency.
+            TXTOrderSubtotal.Text = decOrderSubtotal.ToString("C");
+            TXTShipping.Text = decShippingCost.ToString("C");
+            TXTTax.Text = decTax.ToString("C");
+            TXTOrderTotal.Text = decOrderTotal.ToString("C");
+        }
+
+        /// <summary>
+        /// Checks if the hand delivery option is allowed based on the city and state entered by the user.  
+        /// </summary>
+        private void UpdateHandDeliveryOption()
+        {
+            // This trims the spaces and converts the city
+            // and state text to lowercase for comparison
+            string strCity = TXTCity.Text.Trim().ToLower();
+            string strState = CBXState.Text.Trim().ToLower();
+
+            // This checks if the state is Texas and the city is either Bryan or College Station
+            bool blnAllowed = strState == "tx" && (strCity == "bryan" || strCity == "college station");
+
+            // This enables or disables the hand delivery radio button based on the allowed condition
+            RDOHandDelivery.Enabled = blnAllowed;
+
+            // If hand delivery is not allowed and it is currently selected, switch to mail delivery
+            if (!blnAllowed && RDOHandDelivery.Checked)
+            {
+                RDOHandDelivery.Checked = false; // Uncheck hand delivery
+                RDOMail.Checked = true; // Check mail delivery
+            }
+        }
+
+        /// <summary>
+        ///  Updates the hand delivery when the city text changes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TXTCity_TextChanged(object sender, EventArgs e)
+        {
+            UpdateHandDeliveryOption();
+        }
+
+        private void CBXState_SelectedIndexChange(object sender, EventArgs e)
+        {
+            //Updates the hand delivery option when the state changes
+            UpdateHandDeliveryOption();
         }
 
         /// <summary>
@@ -326,6 +556,51 @@ namespace FRMOrder
             Close();
         }
 
+        /// <summary>
+        /// This method updates the order totals when the delivery option is changed to mail delivery.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RDOMail_CheckedChanged(object sender, EventArgs e)
+        {
+            CalculateTotals();
+        }
+
+        /// <summary>
+        /// This method updates the order totals when the delivery option is changed to hand delivery.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RDOHandDelivery_CheckedChanged(object sender, EventArgs e)
+        {
+            CalculateTotals();
+        }
+
         #endregion
+
+        /// <summary>
+        /// This fills in the customer information fields with default data.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BTNDefaultCustomer_Click(object sender, EventArgs e)
+        {
+            //This fills in default customer information for testing
+            TXTCustomerName.Text = "John Doe";
+            TXTStreetAddress.Text = "123 Apple Street";
+            TXTCity.Text = "College Station";
+            CBXState.SelectedItem = "TX";
+            TXTZipCode.Text = "77840";
+            TXTPhoneNumber.Text = "9791234567";
+        }
+
+        private void BTNViewInventory_Click(object sender, EventArgs e)
+        {
+            //Creates the Inventory form
+            FRMInventory frmInventory = new FRMInventory();
+
+            //Opens the Inventory form
+            frmInventory.ShowDialog();
+        }
     }
 }
