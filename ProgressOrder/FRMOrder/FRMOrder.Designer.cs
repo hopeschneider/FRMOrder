@@ -87,9 +87,9 @@
             this.GBXDeliveryInfo.Controls.Add(this.RDOHandDelivery);
             this.GBXDeliveryInfo.Controls.Add(this.RDOMail);
             this.GBXDeliveryInfo.Location = new System.Drawing.Point(554, 11);
-            this.GBXDeliveryInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GBXDeliveryInfo.Margin = new System.Windows.Forms.Padding(2);
             this.GBXDeliveryInfo.Name = "GBXDeliveryInfo";
-            this.GBXDeliveryInfo.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GBXDeliveryInfo.Padding = new System.Windows.Forms.Padding(2);
             this.GBXDeliveryInfo.Size = new System.Drawing.Size(266, 81);
             this.GBXDeliveryInfo.TabIndex = 2;
             this.GBXDeliveryInfo.TabStop = false;
@@ -99,7 +99,7 @@
             // 
             this.RDOHandDelivery.AutoSize = true;
             this.RDOHandDelivery.Location = new System.Drawing.Point(129, 41);
-            this.RDOHandDelivery.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RDOHandDelivery.Margin = new System.Windows.Forms.Padding(2);
             this.RDOHandDelivery.Name = "RDOHandDelivery";
             this.RDOHandDelivery.Size = new System.Drawing.Size(119, 17);
             this.RDOHandDelivery.TabIndex = 1;
@@ -112,7 +112,7 @@
             // 
             this.RDOMail.AutoSize = true;
             this.RDOMail.Location = new System.Drawing.Point(35, 41);
-            this.RDOMail.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RDOMail.Margin = new System.Windows.Forms.Padding(2);
             this.RDOMail.Name = "RDOMail";
             this.RDOMail.Size = new System.Drawing.Size(71, 17);
             this.RDOMail.TabIndex = 0;
@@ -136,9 +136,9 @@
             this.GBXCustomerInfo.Controls.Add(this.TXTCustomerName);
             this.GBXCustomerInfo.Controls.Add(this.label1);
             this.GBXCustomerInfo.Location = new System.Drawing.Point(10, 11);
-            this.GBXCustomerInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GBXCustomerInfo.Margin = new System.Windows.Forms.Padding(2);
             this.GBXCustomerInfo.Name = "GBXCustomerInfo";
-            this.GBXCustomerInfo.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GBXCustomerInfo.Padding = new System.Windows.Forms.Padding(2);
             this.GBXCustomerInfo.Size = new System.Drawing.Size(526, 171);
             this.GBXCustomerInfo.TabIndex = 3;
             this.GBXCustomerInfo.TabStop = false;
@@ -147,7 +147,7 @@
             // TXTPhoneNumber
             // 
             this.TXTPhoneNumber.Location = new System.Drawing.Point(284, 133);
-            this.TXTPhoneNumber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TXTPhoneNumber.Margin = new System.Windows.Forms.Padding(2);
             this.TXTPhoneNumber.Name = "TXTPhoneNumber";
             this.TXTPhoneNumber.Size = new System.Drawing.Size(130, 20);
             this.TXTPhoneNumber.TabIndex = 5;
@@ -164,9 +164,10 @@
             // 
             // CBXState
             // 
+            this.CBXState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBXState.FormattingEnabled = true;
             this.CBXState.Location = new System.Drawing.Point(284, 87);
-            this.CBXState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CBXState.Margin = new System.Windows.Forms.Padding(2);
             this.CBXState.Name = "CBXState";
             this.CBXState.Size = new System.Drawing.Size(130, 21);
             this.CBXState.TabIndex = 3;
@@ -184,7 +185,7 @@
             // TXTStreetAddress
             // 
             this.TXTStreetAddress.Location = new System.Drawing.Point(284, 40);
-            this.TXTStreetAddress.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TXTStreetAddress.Margin = new System.Windows.Forms.Padding(2);
             this.TXTStreetAddress.Name = "TXTStreetAddress";
             this.TXTStreetAddress.Size = new System.Drawing.Size(219, 20);
             this.TXTStreetAddress.TabIndex = 1;
@@ -202,7 +203,7 @@
             // TXTZipCode
             // 
             this.TXTZipCode.Location = new System.Drawing.Point(20, 133);
-            this.TXTZipCode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TXTZipCode.Margin = new System.Windows.Forms.Padding(2);
             this.TXTZipCode.Name = "TXTZipCode";
             this.TXTZipCode.Size = new System.Drawing.Size(99, 20);
             this.TXTZipCode.TabIndex = 4;
@@ -220,7 +221,7 @@
             // TXTCity
             // 
             this.TXTCity.Location = new System.Drawing.Point(20, 87);
-            this.TXTCity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TXTCity.Margin = new System.Windows.Forms.Padding(2);
             this.TXTCity.Name = "TXTCity";
             this.TXTCity.Size = new System.Drawing.Size(136, 20);
             this.TXTCity.TabIndex = 2;
@@ -238,7 +239,7 @@
             // TXTCustomerName
             // 
             this.TXTCustomerName.Location = new System.Drawing.Point(20, 40);
-            this.TXTCustomerName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TXTCustomerName.Margin = new System.Windows.Forms.Padding(2);
             this.TXTCustomerName.Name = "TXTCustomerName";
             this.TXTCustomerName.Size = new System.Drawing.Size(200, 20);
             this.TXTCustomerName.TabIndex = 0;
@@ -263,9 +264,9 @@
             this.GBXProductInfo.Controls.Add(this.label8);
             this.GBXProductInfo.Controls.Add(this.CBXProductType);
             this.GBXProductInfo.Location = new System.Drawing.Point(20, 212);
-            this.GBXProductInfo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GBXProductInfo.Margin = new System.Windows.Forms.Padding(2);
             this.GBXProductInfo.Name = "GBXProductInfo";
-            this.GBXProductInfo.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GBXProductInfo.Padding = new System.Windows.Forms.Padding(2);
             this.GBXProductInfo.Size = new System.Drawing.Size(385, 203);
             this.GBXProductInfo.TabIndex = 4;
             this.GBXProductInfo.TabStop = false;
@@ -274,7 +275,7 @@
             // BTNAddItemToOrder
             // 
             this.BTNAddItemToOrder.Location = new System.Drawing.Point(223, 152);
-            this.BTNAddItemToOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BTNAddItemToOrder.Margin = new System.Windows.Forms.Padding(2);
             this.BTNAddItemToOrder.Name = "BTNAddItemToOrder";
             this.BTNAddItemToOrder.Size = new System.Drawing.Size(151, 38);
             this.BTNAddItemToOrder.TabIndex = 9;
@@ -285,7 +286,7 @@
             // TXTQuantity
             // 
             this.TXTQuantity.Location = new System.Drawing.Point(10, 132);
-            this.TXTQuantity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TXTQuantity.Margin = new System.Windows.Forms.Padding(2);
             this.TXTQuantity.Name = "TXTQuantity";
             this.TXTQuantity.Size = new System.Drawing.Size(99, 20);
             this.TXTQuantity.TabIndex = 8;
@@ -302,9 +303,10 @@
             // 
             // CBXMaterialDesign
             // 
+            this.CBXMaterialDesign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBXMaterialDesign.FormattingEnabled = true;
             this.CBXMaterialDesign.Location = new System.Drawing.Point(10, 86);
-            this.CBXMaterialDesign.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CBXMaterialDesign.Margin = new System.Windows.Forms.Padding(2);
             this.CBXMaterialDesign.Name = "CBXMaterialDesign";
             this.CBXMaterialDesign.Size = new System.Drawing.Size(163, 21);
             this.CBXMaterialDesign.TabIndex = 7;
@@ -331,9 +333,10 @@
             // 
             // CBXProductType
             // 
+            this.CBXProductType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CBXProductType.FormattingEnabled = true;
             this.CBXProductType.Location = new System.Drawing.Point(10, 41);
-            this.CBXProductType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.CBXProductType.Margin = new System.Windows.Forms.Padding(2);
             this.CBXProductType.Name = "CBXProductType";
             this.CBXProductType.Size = new System.Drawing.Size(163, 21);
             this.CBXProductType.TabIndex = 6;
@@ -342,7 +345,7 @@
             // BTNProcessOrder
             // 
             this.BTNProcessOrder.Location = new System.Drawing.Point(512, 505);
-            this.BTNProcessOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BTNProcessOrder.Margin = new System.Windows.Forms.Padding(2);
             this.BTNProcessOrder.Name = "BTNProcessOrder";
             this.BTNProcessOrder.Size = new System.Drawing.Size(104, 38);
             this.BTNProcessOrder.TabIndex = 5;
@@ -353,7 +356,7 @@
             // BTNClearForm
             // 
             this.BTNClearForm.Location = new System.Drawing.Point(626, 505);
-            this.BTNClearForm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BTNClearForm.Margin = new System.Windows.Forms.Padding(2);
             this.BTNClearForm.Name = "BTNClearForm";
             this.BTNClearForm.Size = new System.Drawing.Size(104, 38);
             this.BTNClearForm.TabIndex = 6;
@@ -382,7 +385,7 @@
             // BTNClose
             // 
             this.BTNClose.Location = new System.Drawing.Point(735, 505);
-            this.BTNClose.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BTNClose.Margin = new System.Windows.Forms.Padding(2);
             this.BTNClose.Name = "BTNClose";
             this.BTNClose.Size = new System.Drawing.Size(104, 38);
             this.BTNClose.TabIndex = 9;
@@ -501,7 +504,7 @@
             this.Controls.Add(this.GBXCustomerInfo);
             this.Controls.Add(this.GBXDeliveryInfo);
             this.Controls.Add(this.label2);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FRMOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Order";
