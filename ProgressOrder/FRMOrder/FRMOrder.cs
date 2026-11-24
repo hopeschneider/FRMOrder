@@ -70,6 +70,24 @@ namespace FRMOrder
             new string[] { "Bifold", "Trifold", "Passport" }
          };
 
+        // Determines product price
+        decimal[][] decPrices = new decimal[][]
+        {
+            // Wood jewelry box (Art Deco, Rustic, Mid-Century, Victorian, Classic)
+            new decimal[] { 25.00m, 25.00m, 25.00m, 25.00m, 25.00m },
+            // Ceramic vase (Modern, Minimalist, Ornate, Stoneware)
+            new decimal[] { 25.00m, 25.00m, 25.00m, 25.00m },
+            // Handmade candle (Votive, Pillar, Taper)
+            new decimal[] { 25.00m, 25.00m, 25.00m },
+            // Stained glass frame (Geometric, Floral, Abstract, Mosaic)
+            new decimal[] { 25.00m, 25.00m, 25.00m, 25.00m },
+            // Knitted scarf (Bandana, Square, Shawl, Infinity)
+            new decimal[] { 35.00m, 35.00m, 35.00m, 35.00m },
+            // Leather wallet (Bifold, Trifold, Passport)
+            new decimal[] { 20.00m, 30.00m, 35.00m }
+
+        };
+
         #region Order Processing
 
         /// <summary>
@@ -187,23 +205,11 @@ namespace FRMOrder
             string strProduct = CBXProductType.Text;
             string strMaterial = CBXMaterialDesign.Text;
 
-            // Initialize the default base price as a decimal literal
-            decimal decPrice = 25.00m;
+            // Determines price of a product according to user selection of Product Type and Material/Design by grabbing price from decPrices global array
+            int intSelectedProductIndex = CBXProductType.SelectedIndex;
+            int intSelectedMaterialIndex = CBXMaterialDesign.SelectedIndex;
 
-            // determine the product price
-            if (strProduct == "Knitted scarf")
-            {
-                decPrice = 35.00m;
-            }
-            else if (strProduct == "Leather wallet")
-            {
-                if (strMaterial == "Bifold")
-                    decPrice = 20.00m;
-                else if (strMaterial == "Trifold")
-                    decPrice = 30.00m;
-                else if (strMaterial == "Passport")
-                    decPrice = 35.00m;
-            }
+            decimal decPrice = decPrices[intSelectedProductIndex][intSelectedMaterialIndex];
 
             // calculate item subtotal
             decimal decItemSubtotal = intQuantity * decPrice;
