@@ -51,7 +51,9 @@
     <Compile Include="FRMInventory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FRMInventory.Designer.cs" />
+	  <Compile Include="FRMInventory.Designer.cs">
+		  <DependentUpon>FRMInventory.cs</DependentUpon>
+	  </Compile>
     <Compile Include="FRMOrder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,7 +64,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validator.cs" />
-    <EmbeddedResource Include="FRMInventory.resx" />
+	  <EmbeddedResource Include="FRMInventory.resx">
+		  <DependentUpon>FRMInventory.cs</DependentUpon>
+	  </EmbeddedResource>
     <EmbeddedResource Include="FRMOrder.resx">
       <DependentUpon>FRMOrder.cs</DependentUpon>
     </EmbeddedResource>
