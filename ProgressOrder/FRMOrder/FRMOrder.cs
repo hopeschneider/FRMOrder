@@ -42,6 +42,12 @@ namespace FRMOrder
         /// </summary>
         decimal decOrderSubtotal = 0.0m;
 
+        // Stores the product indexes for the current order
+        List<int> lstProductIndexes = new List<int>();
+
+        // Stores the quantities for the current order
+        List<int> lstQuantities = new List<int>();
+
         // Store the material options for each product
         string[][] strMaterialList = new string[][]
         {
@@ -78,16 +84,41 @@ namespace FRMOrder
         /// <param name="e"></param>
         private void BTNProcessOrder_Click(object sender, EventArgs e)
         {
-            // Runs all field and delivery validations (displays one message box if invalid)
+            // Validates customer and order information
             if (!IsValidData())
             {
                 return;
             }
 
-            // Displays a message box confirming that the order has been processed successfully
-            MessageBox.Show("Your order has been processed successfully!", "Order Confirmation", MessageBoxButtons.OK);
+            // Checks if the order contains any items
+            if (lstProductIndexes.Count == 0)
+            {
+                MessageBox.Show("Please add at least one item to your order.",
+                                "Order Error");
+                return;
+            }
 
-            // Reset the form for the next order
+            // Checks available inventory before processing
+            if (!InventoryData.HasEnoughInventoryForOrder(
+                lstProductIndexes, lstQuantities))
+            {
+                MessageBox.Show("Not enough ingredients are available.",
+                                "Inventory Error");
+                return;
+            }
+
+            // Deducts ingredients for every item in the order
+            for (int i = 0; i < lstProductIndexes.Count; i++)
+            {
+                InventoryData.DeductIngredients(
+                    lstProductIndexes[i], lstQuantities[i]);
+            }
+
+            // Displays order confirmation
+            MessageBox.Show("Your order has been processed successfully!",
+                            "Order Confirmation", MessageBoxButtons.OK);
+
+            // Resets the form for the next order
             ClearForm();
         }
 
@@ -130,6 +161,27 @@ namespace FRMOrder
 
             // Parse the item quantity entered in the textbox into an integer
             int intQuantity = int.Parse(TXTQuantity.Text);
+
+            // Gets the index of the selected product
+            int intProductIndex = CBXProductType.SelectedIndex;
+
+            // Adds the selected product and quantity to the lists
+            lstProductIndexes.Add(intProductIndex);
+            lstQuantities.Add(intQuantity);
+
+            // Checks if enough ingredients are available for the entire order
+            if (!InventoryData.HasEnoughInventoryForOrder(
+                lstProductIndexes, lstQuantities))
+            {
+                // Removes the item that exceeds available inventory
+                lstProductIndexes.RemoveAt(lstProductIndexes.Count - 1);
+                lstQuantities.RemoveAt(lstQuantities.Count - 1);
+
+                // Displays an error message
+                MessageBox.Show("Not enough ingredients are available for this order.",
+                                "Inventory Error");
+                return;
+            }
 
             // Retrieve selected product and material text from the comboboxes
             string strProduct = CBXProductType.Text;
@@ -208,18 +260,15 @@ namespace FRMOrder
                 CBXMaterialDesign.Items.Add(strMaterialList[intSelectedIndex][i]);
             }
             // checks the current product and updates the PictureBox to display the corresponding image resource.
-            if (strProduct == "Wood jewelry box" ||
-               strProduct == "Ceramic vase")
+            if (strProduct == "Wood jewelry box" || strProduct == "Ceramic vase")
             {
                 PBXProductImage.Image = Properties.Resources.craft;
             }
-            else if (strProduct == "Handmade candle" ||
-                     strProduct == "Stained glass frame")
+            else if (strProduct == "Handmade candle" || strProduct == "Stained glass frame")
             {
                 PBXProductImage.Image = Properties.Resources.decor;
             }
-            else if (strProduct == "Knitted scarf" ||
-                     strProduct == "Leather wallet")
+            else if (strProduct == "Knitted scarf" || strProduct == "Leather wallet")
             {
                 PBXProductImage.Image = Properties.Resources.textile;
             }
@@ -412,6 +461,10 @@ namespace FRMOrder
 
             // Return focus to customer name
             TXTCustomerName.Focus();
+
+            // Clears the stored products and quantities
+            lstProductIndexes.Clear();
+            lstQuantities.Clear();
         }
 
         /// <summary>
@@ -455,6 +508,18 @@ namespace FRMOrder
             {
                 CalculateOrderTotals();
             }
+        }
+
+        /// <summary>
+        /// Opens the inventory form to display available ingredients
+        /// and their current quantities.
+        /// </summary>
+        private void BTNViewInventory_Click(object sender, EventArgs e)
+        {
+            // Creates an instance of the inventory form
+            FRMInventory frmInventory = new FRMInventory();
+            // Displays the inventory form in a separate window
+            frmInventory.ShowDialog();
         }
     }
 }
