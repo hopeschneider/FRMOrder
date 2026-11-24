@@ -42,6 +42,28 @@ namespace FRMOrder
         /// </summary>
         decimal decOrderSubtotal = 0.0m;
 
+        // Store the material options for each product
+        string[][] strMaterialList = new string[][]
+        {
+            // Wood jewelry box
+            new string[] { "Art Deco", "Rustic", "Mid-Century", "Victorian", "Classic" },
+
+            // Ceramic vase
+            new string[] { "Modern", "Minimalist", "Ornate", "Stoneware" },
+
+            // Handmade candle
+            new string[] { "Votive", "Pillar", "Taper" },
+
+            // Stained glass frame
+            new string[] { "Geometric", "Floral", "Abstract", "Mosaic" },
+
+            // Knitted scarf
+            new string[] { "Bandana", "Square", "Shawl", "Infinity" },
+
+            // Leather wallet
+            new string[] { "Bifold", "Trifold", "Passport" }
+         };
+
         #region Order Processing
 
         /// <summary>
@@ -63,8 +85,10 @@ namespace FRMOrder
             }
 
             // Displays a message box confirming that the order has been processed successfully
-            MessageBox.Show("Your order has been processed successfully!", "Order Confirmation",
-                            MessageBoxButtons.OK);
+            MessageBox.Show("Your order has been processed successfully!", "Order Confirmation", MessageBoxButtons.OK);
+
+            // Reset the form for the next order
+            ClearForm();
         }
 
         #endregion
@@ -142,27 +166,9 @@ namespace FRMOrder
 
             // updates the running order subtotal
             decOrderSubtotal += decItemSubtotal;
-            
-            // sets default shipping cost and checks for hand delivery
-            int intShippingCost = 10;
-            if (RDOHandDelivery.Checked)
-            {
-                intShippingCost = 15;
-            }
-            // calculates tax and final order total
-            decimal decTax =  (decOrderSubtotal + intShippingCost) * .0825m ;
-            decimal decOrderTotal = decOrderSubtotal + intShippingCost + decTax;
 
-            // displays formatted order totals in text boxes
-                TXTOrderSubtotal.Text = decOrderSubtotal.ToString("c");
-                TXTShipping.Text = intShippingCost.ToString("c");
-                TXTTax.Text = decTax.ToString("c");
-                TXTOrderTotal.Text = decOrderTotal.ToString("c");
-
-            // Clear item inputs for the next item
-            TXTQuantity.Clear();
-            CBXProductType.SelectedIndex = -1;
-            CBXMaterialDesign.SelectedIndex = -1;
+            // Update order totals after adding an item
+            CalculateOrderTotals();
         }
 
         #endregion
@@ -183,24 +189,8 @@ namespace FRMOrder
             // clear previous material selections
             CBXMaterialDesign.Items.Clear();
             CBXMaterialDesign.Text = "";
-            //Creating the material list which relates to the product list
-            string[][] strMaterialList = new string[][]
-            {
-             // Wood jewelry box
-             new string[] { "Art Deco", "Rustic", "Mid-Century", "Victorian", "Classic" },
-             // Ceramic vase
-             new string[] { "Modern", "Minimalist", "Ornate", "Stoneware" },
-             // Handmade candle
-             new string[] { "Votive", "Pillar", "Taper" },
-             // Stained glass frame
-            new string[] { "Geometric", "Floral", "Abstract", "Mosaic" },
-            // Knitted scarf
-            new string[] { "Bandana", "Square", "Shawl", "Infinity" },
-            // Leather wallet
-            new string[] { "Bifold", "Trifold", "Passport" }
-            };
+            
 
-            CBXMaterialDesign.Items.Clear();
             // Stores the current index integer of the selected item from the product type ComboBox.
             int intSelectedIndex = CBXProductType.SelectedIndex;
 
@@ -288,41 +278,7 @@ namespace FRMOrder
         /// <param name="e"></param>
         private void BTNClearForm_Click(object sender, EventArgs e)
         {
-            // Clear all input fields and selections on the form
-            TXTCustomerName.Clear();
-            TXTStreetAddress.Clear();
-            TXTCity.Clear();
-            CBXState.SelectedIndex = -1;
-            CBXState.Text = "";
-            TXTZipCode.Clear();
-            TXTPhoneNumber.Clear();
-
-            // Clear the delivery option radio buttons
-            RDOMail.Checked = false;
-            RDOHandDelivery.Checked = false;
-
-            // Clear the product selection and related fields
-            CBXProductType.SelectedIndex = -1;
-            CBXMaterialDesign.Items.Clear();
-            CBXMaterialDesign.Text = "";
-            TXTQuantity.Clear();
-
-            // Clears the product image 
-            PBXProductImage.Image = null;
-
-            // Clear the order items list
-            LBXOrderItems.Items.Clear();
-
-            // Puts the focus back on the Customer Name textbox for user convenience
-            TXTCustomerName.Focus();
-
-            // Clears all order totals and resets the subtotal for a new order
-            decOrderSubtotal = 0.0m;
-
-            TXTOrderSubtotal.Clear();
-            TXTShipping.Clear();
-            TXTTax.Clear();
-            TXTOrderTotal.Clear();
+            ClearForm();
         }
 
         /// <summary>
@@ -354,7 +310,21 @@ namespace FRMOrder
             strErrorMessage += Validator.IsPresent(TXTCity.Text, TXTCity.Tag?.ToString() ?? "City");
             strErrorMessage += Validator.IsPresent(TXTZipCode.Text, TXTZipCode.Tag?.ToString() ?? "Zip Code");
             strErrorMessage += Validator.IsPresent(TXTPhoneNumber.Text, TXTPhoneNumber.Tag?.ToString() ?? "Phone Number");
-            
+
+
+            // Check ZIP code format if entered
+            if (TXTZipCode.Text != "")
+            {
+                strErrorMessage += Validator.IsValidZipCode(TXTZipCode.Text);
+            }
+
+            // Check phone number format if entered
+            if (TXTPhoneNumber.Text != "")
+            {
+                strErrorMessage += Validator.IsValidPhoneNumber(TXTPhoneNumber.Text);
+            }
+
+
             // 2. Validate state, product type, and material/design selection
             if (CBXState.SelectedIndex == -1)
             {
@@ -401,6 +371,90 @@ namespace FRMOrder
             return true; // we have no error. we have a valid new product.
 
         #endregion
+        }
+
+        /// <summary>
+        /// Clears all fields and resets the order form.
+        /// </summary>
+        private void ClearForm()
+        {
+            // Clear customer information
+            TXTCustomerName.Clear();
+            TXTStreetAddress.Clear();
+            TXTCity.Clear();
+            CBXState.SelectedIndex = -1;
+            CBXState.Text = "";
+            TXTZipCode.Clear();
+            TXTPhoneNumber.Clear();
+
+            // Reset delivery options
+            RDOMail.Checked = false;
+            RDOHandDelivery.Checked = false;
+
+            // Clear product selections and quantity
+            CBXProductType.SelectedIndex = -1;
+            CBXMaterialDesign.Items.Clear();
+            CBXMaterialDesign.Text = "";
+            TXTQuantity.Clear();
+
+            // Clear product image and order items
+            PBXProductImage.Image = null;
+            LBXOrderItems.Items.Clear();
+
+            // Reset order subtotal
+            decOrderSubtotal = 0.0m;
+
+            // Clear order totals
+            TXTOrderSubtotal.Clear();
+            TXTShipping.Clear();
+            TXTTax.Clear();
+            TXTOrderTotal.Clear();
+
+            // Return focus to customer name
+            TXTCustomerName.Focus();
+        }
+
+        /// <summary>
+        /// Calculates and displays the order subtotal, shipping, tax, and total.
+        /// </summary>
+        private void CalculateOrderTotals()
+        {
+            // Set the default shipping cost for mail
+            decimal decShippingCost = 10.00m;
+
+            // Change shipping cost for hand delivery
+            if (RDOHandDelivery.Checked)
+            {
+                decShippingCost = 15.00m;
+            }
+
+            // Calculate tax and order total
+            decimal decTax = (decOrderSubtotal + decShippingCost) * 0.0825m;
+            decimal decOrderTotal = decOrderSubtotal + decShippingCost + decTax;
+
+            // Display the updated order totals
+            TXTOrderSubtotal.Text = decOrderSubtotal.ToString("c");
+            TXTShipping.Text = decShippingCost.ToString("c");
+            TXTTax.Text = decTax.ToString("c");
+            TXTOrderTotal.Text = decOrderTotal.ToString("c");
+        }
+
+        private void RDOMail_CheckedChanged(object sender, EventArgs e)
+        {
+            // Update totals when mail delivery is selected
+            if (LBXOrderItems.Items.Count > 0)
+            {
+                CalculateOrderTotals();
+            }
+        }
+
+        private void RDOHandDelivery_CheckedChanged(object sender, EventArgs e)
+        {
+            // Update totals when hand delivery is selected
+            if (LBXOrderItems.Items.Count > 0)
+            {
+                CalculateOrderTotals();
+            }
         }
     }
 }

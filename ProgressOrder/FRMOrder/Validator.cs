@@ -59,6 +59,74 @@ namespace FRMOrder
             }
             return strMessage;
         }
+
+        /// <summary>
+        /// Checks if the ZIP code contains exactly 5 digits.
+        /// </summary>
+        public static string IsValidZipCode(string strZipCode)
+        {
+            // Check that ZIP code has exactly 5 characters
+            if (strZipCode.Length != 5)
+            {
+                return "ZIP Code must contain 5 digits.\n";
+            }
+
+            // Check that each character is a number
+            for (int i = 0; i < strZipCode.Length; i++)
+            {
+                if (!char.IsDigit(strZipCode[i]))
+                {
+                    return "ZIP Code must contain only numbers.\n";
+                }
+            }
+
+            return "";
+        }
+
+
+        /// <summary>
+        /// Checks if the phone number contains 10 digits
+        /// with or without hyphens.
+        /// </summary>
+        public static string IsValidPhoneNumber(string strPhoneNumber)
+        {
+            // Check phone number without hyphens
+            if (strPhoneNumber.Length == 10)
+            {
+                for (int i = 0; i < strPhoneNumber.Length; i++)
+                {
+                    if (!char.IsDigit(strPhoneNumber[i]))
+                    {
+                        return "Phone Number must contain only digits.\n";
+                    }
+                }
+
+                return "";
+            }
+
+            // Check phone number with hyphens
+            if (strPhoneNumber.Length == 12)
+            {
+                if (strPhoneNumber[3] != '-' || strPhoneNumber[7] != '-')
+                {
+                    return "Phone Number format is invalid.\n";
+                }
+
+                for (int i = 0; i < strPhoneNumber.Length; i++)
+                {
+                    if (i != 3 && i != 7 && !char.IsDigit(strPhoneNumber[i]))
+                    {
+                        return "Phone Number must contain valid digits.\n";
+                    }
+                }
+
+                return "";
+            }
+
+            return "Phone Number must be 10 digits with or without hyphens.\n";
+        }
+
+
         /// <summary>
         /// Checks if the delivery location is allowed (Bryan or College Station, TX). 
         /// </summary>
@@ -70,7 +138,7 @@ namespace FRMOrder
             string city = strCity.Trim().ToLower();
             string state = strState.Trim().ToLower();
 
-           if((city == "bryan" || city == "college station") && state == "tx")
+            if ((city == "bryan" || city == "college station") && state == "tx")
             {
                 return "";
             }
@@ -94,19 +162,23 @@ namespace FRMOrder
         public static string ValidateItemEntry(int intProductIndex, int intMaterialIndex)
         {
             string strMessage = "";
-            if(intProductIndex < 0)
+            if (intProductIndex < 0)
             {
                 strMessage += "Please select a Product Type.\n";
             }
 
-            if(intMaterialIndex < 0)
+            if (intMaterialIndex < 0)
             {
                 strMessage += "Please select a Material or Design option.\n";
             }
             return strMessage;
+
         }
 
         #endregion
+
+
+
 
     }
 }
