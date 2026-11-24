@@ -39,3 +39,14 @@ C:\Users\Hieu\source\repos\FRMOrder\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.pd
 C:\Users\Hieu\source\repos\FRMOrder\ProgressOrder\FRMOrder\bin\Debug\FRMOrder.exe.config
 C:\Users\Hieu\source\repos\FRMOrder\ProgressOrder\FRMOrder\bin\Debug\FRMOrder.exe
 C:\Users\Hieu\source\repos\FRMOrder\ProgressOrder\FRMOrder\bin\Debug\FRMOrder.pdb
+C:\Users\andpe\TAMU\Fall2026\ISTM250\Project2\ProgressOrder\FRMOrder\bin\Debug\FRMOrder.exe.config
+C:\Users\andpe\TAMU\Fall2026\ISTM250\Project2\ProgressOrder\FRMOrder\bin\Debug\FRMOrder.exe
+C:\Users\andpe\TAMU\Fall2026\ISTM250\Project2\ProgressOrder\FRMOrder\bin\Debug\FRMOrder.pdb
+C:\Users\andpe\TAMU\Fall2026\ISTM250\Project2\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.csproj.AssemblyReference.cache
+C:\Users\andpe\TAMU\Fall2026\ISTM250\Project2\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.FRMInventory.resources
+C:\Users\andpe\TAMU\Fall2026\ISTM250\Project2\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.FRMOrder.resources
+C:\Users\andpe\TAMU\Fall2026\ISTM250\Project2\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.Properties.Resources.resources
+C:\Users\andpe\TAMU\Fall2026\ISTM250\Project2\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.csproj.GenerateResource.cache
+C:\Users\andpe\TAMU\Fall2026\ISTM250\Project2\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.csproj.CoreCompileInputs.cache
+C:\Users\andpe\TAMU\Fall2026\ISTM250\Project2\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.exe
+C:\Users\andpe\TAMU\Fall2026\ISTM250\Project2\ProgressOrder\FRMOrder\obj\Debug\FRMOrder.pdb

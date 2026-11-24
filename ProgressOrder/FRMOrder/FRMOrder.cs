@@ -521,5 +521,20 @@ namespace FRMOrder
             // Displays the inventory form in a separate window
             frmInventory.ShowDialog();
         }
+
+        /// <summary>
+        /// This fills the customer information with default data.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BTNDefaultCustomer_Click(object sender, EventArgs e)
+        {
+            TXTCustomerName.Text = "John Doe";
+            TXTStreetAddress.Text = "123 Apple Street";
+            TXTCity.Text = "College Station";
+            CBXState.SelectedItem = "TX";
+            TXTZipCode.Text = "77840";
+            TXTPhoneNumber.Text = "9791234567";
+        }
     }
 }
