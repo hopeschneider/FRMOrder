@@ -380,16 +380,6 @@ namespace FRMOrder
                 strErrorMessage += "State is a required field.\n";
             }
             
-            // Should this be included for BTNProcessOrder?
-            //if (CBXProductType.SelectedIndex == -1)
-            //{
-            //    strErrorMessage += "Product Type is a required field.\n";
-            //}
-
-            //if (CBXMaterialDesign.SelectedIndex == -1)
-            //{
-            //    strErrorMessage += "Material / Design is a required field.\n";
-            //}
             
             // 3. Validate Delivery Option & Hand Delivery Location (Bryan or College Station, TX)
             if (!RDOMail.Checked && !RDOHandDelivery.Checked)
@@ -419,8 +409,12 @@ namespace FRMOrder
             }
             return true; // we have no error. we have a valid new product.
 
-        #endregion
+        
         }
+
+        #endregion
+
+        #region Clear Form
 
         /// <summary>
         /// Clears all fields and resets the order form.
@@ -467,6 +461,10 @@ namespace FRMOrder
             lstQuantities.Clear();
         }
 
+        #endregion
+
+        #region Calculation Reusable Method
+
         /// <summary>
         /// Calculates and displays the order subtotal, shipping, tax, and total.
         /// </summary>
@@ -492,6 +490,15 @@ namespace FRMOrder
             TXTOrderTotal.Text = decOrderTotal.ToString("c");
         }
 
+        #endregion
+
+        #region Delivery Checks
+
+        /// <summary>
+        /// This method updates the order totals when the delivery option is changed to mail delivery.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RDOMail_CheckedChanged(object sender, EventArgs e)
         {
             // Update totals when mail delivery is selected
@@ -501,6 +508,11 @@ namespace FRMOrder
             }
         }
 
+        /// <summary>
+        /// This method updates the order totals when the delivery option is changed to hand delivery.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RDOHandDelivery_CheckedChanged(object sender, EventArgs e)
         {
             // Update totals when hand delivery is selected
@@ -522,6 +534,10 @@ namespace FRMOrder
             frmInventory.ShowDialog();
         }
 
+        #endregion
+
+        #region Default Customer Button
+
         /// <summary>
         /// This fills the customer information with default data.
         /// </summary>
@@ -536,5 +552,7 @@ namespace FRMOrder
             TXTZipCode.Text = "77840";
             TXTPhoneNumber.Text = "9791234567";
         }
+
+        #endregion
     }
 }
