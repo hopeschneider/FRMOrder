@@ -48,16 +48,6 @@ namespace FRMOrder
             DisplayInventory();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BTNRefreshInventory_Click(object sender, EventArgs e)
-        {
-            DisplayInventory(); 
-        }
-
         private void BTNClose_Click(object sender, EventArgs e)
         {
             Close();
