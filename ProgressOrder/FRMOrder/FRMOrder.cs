@@ -318,7 +318,7 @@ namespace FRMOrder
 
         #endregion
 
-        #region Form Reset and Close
+        #region Clear and Close Button
 
         /// <summary>
         /// This button resets the entire order form back to its default, empty state.
@@ -521,6 +521,10 @@ namespace FRMOrder
                 CalculateOrderTotals();
             }
         }
+
+        #endregion
+
+        #region View Inventory Button
 
         /// <summary>
         /// Opens the inventory form to display available ingredients

@@ -30,7 +30,7 @@ namespace FRMOrder
                 private static decimal[,] decProductRecipes =
                 {
                 { 0m, 0m, 0.5m, 0m, 3m, 1m },
-                { 4m, 0m, 0.5m, 0m, 0m, 1m },
+                { 4m, 0m, 0m, 0m, 0m, 1m },
                 { 3m, 0m, 0m, 0m, 0m, 2m },
                 { 0m, 4m, 0m, 7m, 0m, 0m },
                 { 0m, 0m, 1m, 0m, 10m, 0m },
