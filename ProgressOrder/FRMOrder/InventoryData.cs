@@ -12,22 +12,22 @@ namespace FRMOrder
     internal class InventoryData
     {
             // Ingredient names
-            public static string[] strIngredientNames =
+            string[] strIngredientNames =
             {
             "Dye", "Hardware", "Felt Lining", "Pigment",
             "Cotton", "Wood", "Clay", "Wax", "Glass",
             "Yarn", "Leather"
-        };
+            };
 
             // Available ingredient inventory
-            public static decimal[] decIngredientInventories =
+            decimal[] decIngredientInventories =
             {
             50m, 150m, 120m, 165m, 220m,
             200m, 500m, 700m, 800m, 2000m, 650m
-        };
+            };
 
             // Rows = ingredients, columns = products
-            public static decimal[,] decProductRecipes =
+            decimal[,] decProductRecipes =
             {
             { 0m, 0m, 0.5m, 0m, 3m, 1m },
             { 4m, 0m, 0.5m, 0m, 0m, 1m },
@@ -40,7 +40,7 @@ namespace FRMOrder
             { 3m, 0m, 0m, 20m, 0m, 0m },
             { 0m, 0m, 0m, 0m, 60m, 0m },
             { 5m, 0m, 0m, 0m, 0m, 20m }
-        };
+            };
 
 
         /// <summary>
